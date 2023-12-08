@@ -1,0 +1,80 @@
+<div class="card">
+    <div class="card-body">
+        <div>
+            <h1 *ngIf="UserId == 0">
+                <i class="fas fa-chevron-left align-self-center me-2" (click)="helper.redirectTo('UserList')"></i>
+                Add New User
+            </h1>
+            <h1 *ngIf="UserId != 0">
+                <i class="fas fa-chevron-left align-self-center me-2" (click)="helper.redirectTo('UserList')"></i>Edit
+                {{UserData.first_name}} {{UserData.last_name}}
+            </h1>
+        </div>
+        <div class="mb-3" style="text-align: right;">
+            <button routerLink="/UserList" icon="pi pi-times-circle" label="Cancel" pButton pRipple
+                class="p-button-secondary me-3 mb-3"></button>
+            <button pButton pRipple icon="pi pi-check-circle" label="Save" class="p-button-success me-3 mb-3"
+                *ngIf="this.UserId == 0" (click)="SaveUser()"></button>
+            <button pButton pRipple icon="pi pi-check-circle" label="Update" class="p-button-success me-3 mb-3"
+                *ngIf="this.UserId != 0" (click)="SaveUser()"></button>
+            <button pButton pRipple icon="pi pi-user-plus" label="Active" class="p-button-success me-3 mb-3"
+                *ngIf="this.UserId != 0 && !UserData.status" (click)="Usersuspendoractive()"></button>
+            <button pButton pRipple icon="pi pi-user-minus" label="Suspend" class="p-button-danger me-3 mb-3"
+                *ngIf="this.UserId != 0 && UserData.status" (click)="Usersuspendoractive()"></button>
+        </div>
+        <hr>
+        <div class="row" [formGroup]="UserForm">
+            <div class="col-sm-4 form-group mb-3">
+                <label>User Role<span style="color: red;"> * </span></label>
+                <p-dropdown appendTo="body" formControlName="user_role_id" [filter]="true" [virtualScroll]="true"
+                    [itemSize]="5" [options]="UserRoledropdown" optionLabel="name" optionValue="id"
+                    placeholder="Selectr User Role" [(ngModel)]="UserData.user_role_id"></p-dropdown>
+                <app-validation propertyName="user_role_id" [MessageArray]="UserValidationMessages"
+                    [FormGroupName]="UserForm"></app-validation>
+            </div>
+            <div class="col-sm-4 form-group mb-3">
+                <label>First Name<span style="color: red"> * </span></label>
+                <input type="text" class="form-control" placeholder="Enter First Name" formControlName="first_name"
+                    [(ngModel)]="UserData.first_name" />
+                <app-validation propertyName="first_name" [MessageArray]="UserValidationMessages"
+                    [FormGroupName]="UserForm"></app-validation>
+            </div>
+            <div class="col-sm-4 form-group mb-3">
+                <label>Last name</label>
+                <input type="text" class="form-control" placeholder="Enter Last Name" formControlName="last_name"
+                    [(ngModel)]="UserData.last_name" />
+                <app-validation propertyName="last_name" [MessageArray]="UserValidationMessages"
+                    [FormGroupName]="UserForm"></app-validation>
+            </div>
+            <div class="col-sm-4 form-group mb-3" *ngIf="this.UserId != 0">
+                <label>Email<span style="color: red;"> * </span></label>
+                <input type="email" placeholder="Enter Email" autocomplete="email" formControlName="email"
+                    class="form-control d-block w-100 ronded mb-1" [(ngModel)]="UserData.email" readonly>
+                <app-validation propertyName="email" [MessageArray]="UserValidationMessages"
+                    [FormGroupName]="UserForm"></app-validation>
+            </div>
+            <div class="col-sm-4 form-group mb-3" *ngIf="this.UserId == 0">
+                <label>Email<span style="color: red;"> * </span></label>
+                <input type="email" placeholder="Enter email" autocomplete="email" formControlName="email"
+                    class="form-control d-block w-100 ronded mb-1" [(ngModel)]="UserData.email">
+                <app-validation propertyName="email" [MessageArray]="UserValidationMessages"
+                    [FormGroupName]="UserForm"></app-validation>
+            </div>
+            <div class="col-sm-4 form-group mb-3">
+                <label>Mobile</label>
+                <input type="tel" placeholder="Enter Mobile Number" formControlName="mobile"
+                    class="form-control d-block w-100 ronded mb-1" [(ngModel)]="UserData.mobile">
+                <app-validation propertyName="mobile" [MessageArray]="UserValidationMessages"
+                    [FormGroupName]="UserForm"></app-validation>
+            </div>
+            <div class="col-sm-4 form-group mb-3" *ngIf="!(UserId != 0)">
+                <label>Password<span style="color: red;"> * </span></label>
+                <p-password [toggleMask]="true" autocomplete="password" placeholder="Enter Password" styleClass="w-100"
+                    formControlName="password" placeholder="Enter New Password"
+                    [(ngModel)]="UserData.password"></p-password><app-validation propertyName="password"
+                    [MessageArray]="UserValidationMessages" [FormGroupName]="UserForm"></app-validation>
+            </div>
+        </div>
+    </div>
+</div>
+<p-confirmDialog header="Confirmation" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>

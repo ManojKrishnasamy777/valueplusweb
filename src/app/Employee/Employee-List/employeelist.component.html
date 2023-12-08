@@ -1,0 +1,117 @@
+<div class="card">
+    <div class="card-body">
+        <div>
+            <h1>
+                Employee List
+            </h1>
+        </div>
+        <div class="mb-3" style="text-align: right;">
+            <button pButton pRipple icon="pi pi-plus-circle" label="Add New Employee" class="btn btn-primary"
+                (click)="Editemployee(0)"></button>
+        </div>
+        <p-table responsive="true" #dt [globalFilterFields]="['user.first_name','user.last_name','date_of_birth','department','email']" sortMode="multiple"
+            [value]="EmployeeList" [multiSortMeta]="[{ field: 'first_name', order: 1 },{ field: 'date_of_birth', order: 1 }]" [paginator]="true"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rows]="10"
+            [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" styleClass="p-datatable-striped">
+            <ng-template pTemplate="caption">
+                <div class="d-flex flex-row flex-wrap justify-content-between align-items-center py-2">
+                    <span> List of Employee</span>
+                    <span class="p-input-icon-left">
+                        <i class="pi pi-search"></i>
+                        <input pInputText type="text" placeholder="Search"
+                            (input)="dt.filterGlobal($event.target.value, 'contains')" />
+                    </span>
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header" let-columns>
+                <tr>
+                    <th pSortableColumn="first_name">
+                        Employee Name
+                        <p-sortIcon field="first_name"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="department">
+                       Department
+                        <p-sortIcon field="department"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="email">
+                       Email
+                        <p-sortIcon field="email"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="date_of_birth">
+                        Date Of Birth
+                        <p-sortIcon field="date_of_birth"></p-sortIcon>
+                    </th>
+
+                    <th>
+                        Action
+                    </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowData>
+                <tr>
+                    <td>
+                        <span class="p-column-title">User Name : </span>{{rowData.first_name + ' ' +
+                        rowData.last_name }}
+                    </td>
+                    <td>
+                        <span class="p-column-title">Department : </span>{{rowData.department}}
+                    </td>
+                    <td>
+                        <span class="p-column-title">Email : </span>{{rowData.email}}
+                    </td>
+
+                    <td>
+                        <span class="p-column-title">Date Of Birth : </span>{{rowData.date_of_birth | date :
+                        "dd-MMM-yyyy"}}
+                    </td>
+
+                    <td>
+                        <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-primary m-2"
+                            (click)="Editemployee(rowData.id)"></button>
+                        <button pButton pRipple icon="pi pi-user-plus" label="Assign User"
+                            class="p-button-success ms-3 mb-2" (click)="openAssignEmployee(rowData)"></button>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>
+
+
+<p-dialog [closable]="false" [breakpoints]="{ '960px': '75vw', '640px': '100vw' }" [modal]="true" [draggable]="false"
+  [resizable]="false" [(visible)]="EmployeeasUserlDialog" [style]="{ width: '50%' }" *ngIf="EmployeeasUserlDialog"> 
+  <p-header>
+    Assign Employee as User
+  </p-header>  
+   <div class="row" [formGroup]="EmployeeUserForm">
+        <div class="col-6 form-group">
+            <label>Email<span style="color: red"> * </span></label>
+            <input type="text" class="form-control" formControlName="email" placeholder="Enter email"
+                [(ngModel)]="EmployeeUserData.email" readonly/>
+            <app-validation propertyName="email" [MessageArray]="EmployeeValidationMessages"
+                [FormGroupName]="EmployeeUserForm"></app-validation>
+        </div>
+        <div class="col-6 form-group">
+            <label>Password<span style="color: red"> * </span></label>
+                <p-password [feedback]="false"  [toggleMask]="true" autocomplete="password" placeholder="Enter Password"
+                formControlName="password" styleClass="w-100"
+                [(ngModel)]="EmployeeUserData.password"></p-password>
+            <app-validation propertyName="password" [MessageArray]="EmployeeValidationMessages"
+                [FormGroupName]="EmployeeUserForm"></app-validation>
+        </div>
+    </div>
+
+    <p-footer>
+        <div style="text-align: right" class="mt-3">
+
+            <button  (click)="CloseDialouge()" pButton pRipple icon="pi pi-times-circle"
+                label="Cancel" class="p-button-secondary me-3 mb-3"></button>
+            <button pButton pRipple icon="pi pi-check-circle" label="Confirm"
+                class="p-button-success me-3 mb-3" (click)="AssignEmployeeUser()"></button>
+        </div>
+    </p-footer>
+</p-dialog>
+
+
+
+<p-confirmDialog header="Confirmation" rejectButtonStyleClass="p-button-text"></p-confirmDialog>

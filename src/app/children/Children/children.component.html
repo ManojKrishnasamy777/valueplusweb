@@ -1,0 +1,121 @@
+<div class="card">
+    <div class="card-body">
+        <div>
+            <h1 *ngIf="ChildrenData.id ">
+                <i class="fas fa-chevron-left align-self-center me-2"
+                    (click)="helper.redirectTo('ChildrenList')"></i>Edit Child - 
+                {{ChildrenData.first_name + ' '+ ChildrenData.last_name}}
+            </h1>
+        </div>
+
+        <h1 *ngIf="!ChildrenData.id">
+            <i class="fas fa-chevron-left align-self-center me-2" (click)="helper.redirectTo('ChildrenList')"></i>
+            Add New children
+        </h1>
+
+        <div class="mb-3" style="text-align: right;">
+            <button routerLink="/ChildrenList" pButton pRipple icon="pi pi-times-circle" label="Cancel"
+                class="p-button-secondary me-3 mb-3"></button>
+            <button pButton pRipple icon="pi pi-check-circle" label="Save" class="p-button-success me-3 mb-3"
+                (click)="Save()"></button>
+        </div>
+        <hr>
+
+        <div class="row" [formGroup]="ChildrenForm">
+            <div class="col-sm-4 form-group mb-3">
+                <label>Children Number</label>
+                <input type="text" class="form-control" placeholder="Auto Number" formControlName="student_number"
+                    [(ngModel)]="ChildrenData.student_number" readonly/>
+                <app-validation propertyName="student_number" [MessageArray]="ChildrenValidationMessages"
+                    [FormGroupName]="ChildrenForm"></app-validation>
+            </div>
+
+            <div class="col-sm-4 form-group mb-3">
+                <label>First Name<span style="color: red"> * </span></label>
+                <input type="text" class="form-control" placeholder="Enter First Name" formControlName="first_name"
+                    [(ngModel)]="ChildrenData.first_name" />
+                <app-validation propertyName="first_name" [MessageArray]="ChildrenValidationMessages"
+                    [FormGroupName]="ChildrenForm"></app-validation>
+            </div>
+
+            <div class="col-sm-4 form-group mb-3">
+                <label>Last name</label>
+                <input type="text" class="form-control" placeholder="Enter Last Name" formControlName="last_name"
+                    [(ngModel)]="ChildrenData.last_name" />
+                <app-validation propertyName="last_name" [MessageArray]="ChildrenValidationMessages"
+                    [FormGroupName]="ChildrenForm"></app-validation>
+
+            </div>
+
+            <div class="col-sm-4 form-group mb-3">
+                <label>Gender<span style="color: red;"> * </span></label>
+                <p-dropdown appendTo="body" formControlName="gender" optionLabel="name" optionValue="id"
+                    [options]="GenderList" placeholder="Select Gender" [(ngModel)]="ChildrenData.gender"></p-dropdown>
+                <app-validation propertyName="gender" [MessageArray]="ChildrenValidationMessages"
+                    [FormGroupName]="ChildrenForm"></app-validation>
+            </div>
+
+            <div class="col-lg-4 form-group mb-3">
+                <label>Date Of Birth<span style="color: red"> * </span> </label>
+                <p-calendar inputId="basic" formControlName="date_of_birth" dateFormat="dd-M-yy"
+                    placeholder="Select Date Of Birth" [(ngModel)]="ChildrenData.date_of_birth"></p-calendar>
+                <app-validation propertyName="date_of_birth" [MessageArray]="ChildrenValidationMessages"
+                    [FormGroupName]="ChildrenForm"></app-validation>
+            </div>
+
+            <div class="col-sm-4 form-group mb-3">
+                <label>Assessment<span style="color: red;"> * </span></label>
+                <input type="text" class="form-control" placeholder="Enter Assessment" formControlName="assessment_info"
+                    placeholder="Assessment" [(ngModel)]="ChildrenData.assessment_info" />
+                <app-validation propertyName="assessment_info" [MessageArray]="ChildrenValidationMessages"
+                    [FormGroupName]="ChildrenForm"></app-validation>
+            </div>
+
+            <div class="col-sm-4 form-group mb-3">
+                <label>Address<span style="color: red;"> * </span></label>
+                <input type="text" class="form-control" placeholder="Enter Address" formControlName="address"
+                    placeholder="Select Address" [(ngModel)]="ChildrenData.address" />
+                <app-validation propertyName="address" [MessageArray]="ChildrenValidationMessages"
+                    [FormGroupName]="ChildrenForm"></app-validation>
+            </div>
+
+
+            <div class="col-sm-4 form-group mb-3">
+                <label>Country<span style="color: red;"> * </span></label>
+                <p-dropdown appendTo="body" formControlName="country_id" optionLabel="name" optionValue="id"
+                    placeholder="Select Country" [options]="CountryList"
+                    (onChange)="GetStateListByCountryId($event.value)"
+                    [(ngModel)]="ChildrenData.country_id"></p-dropdown>
+                <app-validation propertyName="country_id" [MessageArray]="ChildrenValidationMessages"
+                    [FormGroupName]="ChildrenForm"></app-validation>
+            </div>
+
+            <div class="col-sm-4 form-group mb-3">
+                <label>State<span style="color: red;"> * </span></label>
+                <p-dropdown appendTo="body" formControlName="state_id" optionLabel="name" [options]="StateList"
+                    placeholder="Select State" optionValue="id" (onChange)="GetCityListByStateId($event.value)"
+                    [(ngModel)]="ChildrenData.state_id"></p-dropdown>
+                <app-validation propertyName="state_id" [MessageArray]="ChildrenValidationMessages"
+                    [FormGroupName]="ChildrenForm"></app-validation>
+            </div>
+
+            <div class="col-sm-4 form-group mb-3">
+                <label>City<span style="color: red;"> * </span></label>
+                <p-dropdown appendTo="body" formControlName="city_id" optionLabel="name" [options]="CityList"
+                    optionValue="id" placeholder="Select City" [(ngModel)]="ChildrenData.city_id"></p-dropdown>
+                <app-validation propertyName="city_id" [MessageArray]="ChildrenValidationMessages"
+                    [FormGroupName]="ChildrenForm"></app-validation>
+            </div>
+
+
+            <div class="col-sm-4 form-group mb-3">
+                <label>Zipcode<span style="color: red;"> * </span></label>
+                <input type="text" numeric class="form-control" placeholder="Enter Zipcode" formControlName="zip_code"
+                    [(ngModel)]="ChildrenData.zip_code" />
+                <app-validation propertyName="zip_code" [MessageArray]="ChildrenValidationMessages"
+                    [FormGroupName]="ChildrenForm"></app-validation>
+            </div>
+        </div>
+    </div>
+</div>
+<p-confirmDialog header="Confirmation" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>

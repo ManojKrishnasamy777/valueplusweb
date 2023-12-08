@@ -1,0 +1,113 @@
+<div class="card">
+    <div class="card-body">
+        <div class="mb-4">
+            <h1 *ngIf="GoalData.id">
+                <i class="fas fa-chevron-left align-self-center"></i>Edit Goal - {{GoalData.name}}
+            </h1>
+            <h1 *ngIf="GoalData.id == 0">
+                <i class="fas fa-chevron-left align-self-center"></i>
+                Add New Goal
+            </h1>
+        </div>
+
+        <p-tabView>
+            <p-tabPanel header="InFo">
+                <div class="row" [formGroup]="GoalForm">
+                    <div class="mb-3" style="text-align: right;">
+                        <button routerLink="/GoalList" pButton pRipple icon="pi pi-times-circle" label="Cancel"
+                            class="p-button-secondary me-3"></button>
+                        <button pButton pRipple icon="pi pi-check-circle" *ngIf="!GoalData.id" label="Save"
+                            (click)="Save()" class="p-button-success me-3"></button>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="row mt-3">
+                            <div class="col-6 form-group mb-3">
+                                <label> Name<span style="color: red"> * </span></label>
+                                <input type="text" class="form-control" [(ngModel)]="GoalData.name"
+                                    placeholder="Enter Name" formControlName="name" optionValue="id" />
+                                <app-validation propertyName="name" [MessageArray]="GoalValidationMessages"
+                                    [FormGroupName]="GoalForm"></app-validation>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </p-tabPanel>
+            <p-tabPanel header="Activities" *ngIf="GoalData.id">
+                <div class="mb-3" style="text-align: right">
+                    <button pButton pRipple icon="pi pi-plus-circle" label="Add New Activity" class="btn btn-primary"
+                        (click)="AddnewActivity('0')"></button>
+                </div>
+                <p-table responsive="true" #dt [globalFilterFields]="['activity_name']" sortMode="multiple"
+                    [value]="ActivityList" [multiSortMeta]="[{ field: 'activity_name', order: 1 }]" [paginator]="true"
+                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rows]="10"
+                    [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" styleClass="p-datatable-striped">
+                    <ng-template pTemplate="caption">
+                        <div class="d-flex flex-row flex-wrap justify-content-between align-items-center py-2">
+                            <span> List of Activities</span>
+                            <span class="p-input-icon-left">
+                                <i class="pi pi-search"></i>
+                                <input pInputText type="text" placeholder="Search"
+                                    (input)="dt.filterGlobal($event.target.value, 'contains')" />
+                            </span>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="header" let-columns>
+                        <tr>
+                            <th pSortableColumn="name">
+                                Name
+                                <p-sortIcon field="name"></p-sortIcon>
+                            </th>
+                            <!-- <th>
+                                Action
+                            </th> -->
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-rowData>
+                        <tr>
+                            <td>
+                                <span class="p-column-title"> Name : </span>{{rowData.activity_name}}
+                            </td>
+                            <!-- <td>
+                                <button pButton pRipple icon="pi pi-pencil"
+                                    class="p-button-rounded p-button-primary m-2"
+                                    (click)="AddnewActivity(rowData.id)"></button>
+                            </td> -->
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </p-tabPanel>
+        </p-tabView>
+
+        <p-dialog [closable]="false" [breakpoints]="{ '960px': '75vw', '640px': '100vw' }" [modal]="true"
+            [draggable]="false" [resizable]="false" [(visible)]="ActivityDialog" [style]="{ width: '50%' }"
+            *ngIf="ActivityDialog">
+            <p-header>
+                {{ActivityData?.id ? 'Edit Activity - ': 'Add New Activity' }} {{ActivityData?.activity_name}}
+            </p-header>
+
+            <div class="row" [formGroup]="GoalActivityForm">
+                <div class="col-lg-12">
+                    <div class="row mt-3">
+                        <div class="col-lg-6">
+                            <label>Activity Name<span style="color: red"> * </span> </label>
+                            <input type="text" class="form-control" [(ngModel)]="ActivityData.activity_name"
+                                placeholder="Enter Activity Name" formControlName="activity_name" />
+                            <app-validation propertyName="activity_name" [MessageArray]="ActivityValidationMessages"
+                                [FormGroupName]="GoalActivityForm"></app-validation>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p-footer>
+                <div style="text-align: right" class="mt-3">
+                    <button pButton pRipple icon="pi pi-times-circle" label="Cancel"
+                        class="p-button-secondary me-3 mb-3" (click)="CloseDialouge()"></button>
+                    <button pButton pRipple icon="pi pi-check-circle" label="Save" class="p-button-success me-3 mb-3"
+                        (click)="SaveGoalActivity()"></button>
+                </div>
+            </p-footer>
+        </p-dialog>
+
+        <p-confirmDialog header="Confirmation" [baseZIndex]="10000"
+            rejectButtonStyleClass="p-button-text"></p-confirmDialog>
