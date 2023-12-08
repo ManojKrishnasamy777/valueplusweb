@@ -1,0 +1,7 @@
+{
+  "name": "value-plus",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular-standalone"
+}

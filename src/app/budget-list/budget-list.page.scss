@@ -1,0 +1,23 @@
+ion-modal {
+  --height: auto;
+  align-items: end;
+}
+
+ion-modal::part(content) {
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+}
+
+ion-modal::part(handle) {
+  background: #D8D8D8;
+  width: 60px;
+  height: 3px;
+}
+
+.dotted-line {
+  background-image: linear-gradient(to right, #414244 30%, rgba(255, 255, 255, 0) 10%);
+  background-position: top;
+  background-size: 7px 3px;
+  background-repeat: repeat-x;
+  height: 2px;
+}

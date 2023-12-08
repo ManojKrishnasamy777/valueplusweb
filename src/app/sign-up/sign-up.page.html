@@ -1,0 +1,38 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-title class>
+      <div class="text-title text-center">Sign Up</div>
+  </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true" class="ion-padding-start-14 ion-padding-end-14 px-4">
+  <div class="content-container d-flex flex-column min-vh-100 py-4 mx-auto">
+    <div class="flex-grow-1 mb-5">
+      <div class="d-flex flex-row align-items-center mb-5">
+        <div class="flex-grow-1">
+          <h1 class="text-title mt-0 mb-2">Account Setup</h1>
+          <p class="text-sub-title small">Enter your information to setup the account</p>
+        </div>
+        <div>
+          <img src="../../assets/images/logo.png" width="120">
+        </div>
+      </div>
+      <form class="sign-in-form mx-auto">
+        <div class="mb-4">
+          <input class="cus-form-control" placeholder="Server Name" type="text">
+        </div>
+        <div class="mb-4">
+          <input class="cus-form-control" placeholder="Mobile No" type="text">
+        </div>
+        <div class="mb-4">
+          <input class="cus-form-control" placeholder="User Name" type="text">
+        </div>
+        <div class="mb-4">
+          <input class="cus-form-control" placeholder="Password" type="password">
+        </div>
+        <ion-button expand="block" color="primary" routerLink="/dashboard">Submit</ion-button>
+      </form>
+    </div>
+
+  </div>
+</ion-content>

@@ -1,0 +1,28 @@
+<ion-content [fullscreen]="true" class="ion-padding-start-14 ion-padding-end-14 px-4">
+  <div class="content-container d-flex flex-column min-vh-100 py-4 mx-auto">
+    <div class="flex-grow-1 mb-5">
+      <div class="d-flex flex-row align-items-center mb-5">
+        <div class="flex-grow-1">
+          <h1 class="text-title mt-0 mb-2">Welcome Back</h1>
+          <p class="text-sub-title small">Enter your email Id and password for sign In</p>
+        </div>
+        <div>
+          <img src="../../assets/images/logo.png">
+        </div>
+      </div>
+      <form class="sign-in-form mx-auto">
+        <div class="mb-4">
+          <input class="cus-form-control" placeholder="Enter email" type="text">
+        </div>
+        <div class="mb-2">
+          <input class="cus-form-control" placeholder="Enter your password" type="password">
+        </div>
+        <div class="text-end mb-4">
+          <a href="" class="text-decoration-none fw-medium"><ion-text color="primary">Forgot Password?</ion-text></a>
+        </div>
+        <ion-button expand="block" color="primary">Sign In</ion-button>
+      </form>
+    </div>
+    <div class="flex-grow-0 flex-shrink-0 text-center small text-sub-title">Not Register Yet? <a routerLink="/sign-up" class="text-decoration-none"><ion-text color="primary">Sign Up</ion-text></a></div>
+  </div>
+</ion-content>
