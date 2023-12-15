@@ -1,13 +1,57 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Profile</ion-title>
+    <!-- <ion-buttons slot="start">
+      <ion-back-button default-href="/walkthrough"></ion-back-button>
+    </ion-buttons> -->
+    <ion-title>Profile Page</ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">profile</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-card style="margin-top: 50px;">
+    <div class="rounded-10">
+      <div class="ion-text-center">
+        <div class="custom-profile-image-container align-items-center mt-4">
+          <img src="../../assets/icon/icon.png" height="100" width="200" class="custom-profile-image"
+            alt="Profile Image">
+        </div>
+
+        <div class="ion-text mt-4">
+          <div class="d-flex flex-row align-items-center justify-content-between mb-2 ms-2 me-2">
+            <span class="text-sub-title">Email : </span>
+            <span class="text-title">Krishmanoj766@gmail.com</span>
+          </div>
+          <div class="d-flex flex-row align-items-center justify-content-between mb-2 ms-2 me-2">
+            <span class="text-sub-title">FirstName : </span>
+            <span class="text-title">Manoj</span>
+          </div>
+          <div class="d-flex flex-row align-items-center justify-content-between mb-2 ms-2 me-2">
+            <span class="text-sub-title">LastName : </span>
+            <span class="text-title">Krishnasamy</span>
+          </div>
+          <div class="d-flex flex-row align-items-center justify-content-between mb-2 ms-2 me-2">
+            <span class="text-sub-title">Mobile : </span>
+            <span class="text-title">8754060518</span>
+          </div>
+          <div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </ion-card>
+  <ion-card style="margin-top: 10px;">
+    <div class="rounded-10 text-center">
+      <div class="col-12 align-items-center mt-4">
+        <div class="justify-content-center mb-4 ">
+          <span class="text-sub-title">Do u want to update a Server</span>
+        </div>
+        <div class="mb-4 ms-2 me-2">
+          <ion-button routerLink="/sign-up" expand="block" color="success">
+            Edit Account Setup
+          </ion-button>
+        </div>
+      </div>
+    </div>
+  </ion-card>
 </ion-content>

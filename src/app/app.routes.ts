@@ -24,7 +24,7 @@ export const routes: Routes = [
   },
   {
     path: 'profile',
-    loadComponent: () => import('./profile/profile.page').then( m => m.ProfilePage)
+    loadChildren: () => import('./profile/profile.page').then(m => m.ProfilePage)
   },
   {
     path: 'budget-list',

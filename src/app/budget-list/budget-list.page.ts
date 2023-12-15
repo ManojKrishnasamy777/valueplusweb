@@ -172,10 +172,9 @@ export class BudgetListPage implements OnInit, AfterViewInit {
     //       // handle error
     //     });
     // });
-
     const filePath = this.file.dataDirectory + 'file-sample_150kB.pdf';
 
-    this.nativeHTTP.downloadFile(`https://file-examples.com/storage/febf69dcf3656dfd992b0fa/2017/10/file-sample_150kB.pdf`, {},
+    this.nativeHTTP.downloadFile(`https://www.africau.edu/images/default/sample.pdf`, {},
       {
 
       },
