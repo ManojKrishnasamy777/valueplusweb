@@ -1,11 +1,11 @@
 import { Component, EnvironmentInjector, OnInit, inject, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
 import { addIcons } from 'ionicons';
 import { arrowForwardOutline } from 'ionicons/icons';
 import { Router, RouterLink } from '@angular/router';
-import { IonAvatar, IonContent, IonHeader, IonTitle, IonToolbar, IonBackButton, IonButton, IonButtons, IonRefresher, IonRefresherContent } from '@ionic/angular/standalone';
+import { IonAvatar, IonContent, IonHeader, IonTitle, IonToolbar, IonBackButton, IonButton, IonButtons, IonRefresher, IonRefresherContent, IonAccordionGroup, IonAccordion, IonItem, IonLabel } from '@ionic/angular/standalone';
+import { ActionSheetController, IonicModule, RefresherEventDetail } from '@ionic/angular';
 
 @Component({
   selector: 'app-dashboard',
@@ -25,7 +25,11 @@ import { IonAvatar, IonContent, IonHeader, IonTitle, IonToolbar, IonBackButton, 
     IonBackButton,
     IonButtons,
     IonRefresher,
-    IonRefresherContent
+    IonRefresherContent,
+    IonAccordionGroup,
+    IonAccordion,
+    IonItem,
+    IonLabel,
   ],
 })
 export class DashboardPage implements OnInit {
