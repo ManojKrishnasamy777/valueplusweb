@@ -12,6 +12,8 @@ import { FileOpener } from '@awesome-cordova-plugins/file-opener/ngx';
 import { FileTransfer, FileTransferObject } from '@awesome-cordova-plugins/file-transfer/ngx';
 import { File } from '@awesome-cordova-plugins/file/ngx';
 import { HTTP } from '@awesome-cordova-plugins/http/ngx';
+import { CommonHelperService } from 'src/Helper/common-helper.service';
+import { CommonService } from 'src/Service/common.service';
 
 @Component({
   selector: 'app-budget-list',
@@ -55,46 +57,9 @@ export class BudgetListPage implements OnInit, AfterViewInit {
   Status: string = '';
   //@ts-ignore
   CommendForm: FormGroup;
-  budgetList: any[] = [
-    {
-      "type": "Budget",
-      "reqNo": "SampleReqNo2",
-      "redDt": "2023-12-02T13:00:00",
-      "txnNo": "SampleTxnNo2",
-      "reference": "SampleReference2",
-      "requisitioner": "SampleRequisitioner2",
-      "pdf": "SamplePdf2",
-      "approvalStatus": "p",
-      "approvalUserId": 123,
-      "approvalDt": "2023-12-02T13:30:00",
-      "approvalComments": "Approval for process",
-      "id": 7,
-      "status": false,
-      "createdById": 456,
-      "createdOn": "2023-12-02T13:45:00",
-      "updatedById": 1,
-      "updatedOn": "2023-12-02T12:39:02.57"
-    },
-    {
-      "type": "Budget",
-      "reqNo": "SampleReqNo2",
-      "redDt": "2023-12-02T13:00:00",
-      "txnNo": "SampleTxnNo2",
-      "reference": "SampleReference2",
-      "requisitioner": "SampleRequisitioner2",
-      "pdf": "SamplePdf2",
-      "approvalStatus": "p",
-      "approvalUserId": 123,
-      "approvalDt": "2023-12-02T13:30:00",
-      "approvalComments": "Approval for process",
-      "id": 8,
-      "status": false,
-      "createdById": 456,
-      "createdOn": "2023-12-02T13:45:00",
-      "updatedById": 1,
-      "updatedOn": "2023-12-02T12:39:05.0366667"
-    }
-  ];
+  budgetList: any = [];
+  typename: string = 'Purchase%20Rate';
+  userId: number = 3;
   constructor(
     private route: ActivatedRoute,
     private document: DocumentViewer,
@@ -104,16 +69,19 @@ export class BudgetListPage implements OnInit, AfterViewInit {
     public platform: Platform,
     private nativeHTTP: HTTP,
     private filesave: File,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private httpService: CommonService,
+    private helper: CommonHelperService,
 
   ) {
     addIcons({ checkboxOutline, closeCircleOutline, closeOutline });
   }
 
   // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
-  ngOnInit() {
+  async ngOnInit() {
     this.type = this.route.snapshot.queryParams['type'];
-    console.log(this.route.snapshot.queryParams['type'])
+    console.log(this.route.snapshot.queryParams['type']);
+    await this.ApprovalList(this.typename, this.userId);
   }
 
   ngAfterViewInit() {
@@ -195,5 +163,18 @@ export class BudgetListPage implements OnInit, AfterViewInit {
       event.target.complete();
     }, 2000);
   }
+
+  async ApprovalList( typename: string, userId: number) {
+    debugger
+    // let SaveData: any = [];
+    // SaveData["typename"] = this.typename;
+    // SaveData["userId"] = this.userId;
+    typename = this.typename;
+    userId = this.userId
+    let res = await this.httpService.GetAll(`v1/Approval/ApprovalList?typename=${typename}&userId=${userId}`);
+    if (res) {
+      this.budgetList = res;
+    }
+     }
 
 }
