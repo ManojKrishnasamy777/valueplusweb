@@ -11,26 +11,6 @@ import { ActionSheetController, IonicModule, RefresherEventDetail } from '@ionic
   selector: 'app-dashboard',
   templateUrl: './dashboard.page.html',
   styleUrls: ['./dashboard.page.scss'],
-  standalone: true,
-  imports: [
-    CommonModule,
-    FormsModule,
-    RouterLink,
-    IonHeader,
-    IonToolbar,
-    IonTitle,
-    IonAvatar,
-    IonContent,
-    IonButton,
-    IonBackButton,
-    IonButtons,
-    IonRefresher,
-    IonRefresherContent,
-    IonAccordionGroup,
-    IonAccordion,
-    IonItem,
-    IonLabel,
-  ],
 })
 export class DashboardPage implements OnInit {
   public environmentInjector = inject(EnvironmentInjector);

@@ -19,35 +19,6 @@ import { CommonService } from 'src/app/Service/common.service';
   selector: 'app-budget-list',
   templateUrl: './budget-list.page.html',
   styleUrls: ['./budget-list.page.scss'],
-  standalone: true,
-  imports: [
-    CommonModule,
-    IonHeader,
-    IonToolbar,
-    IonButtons,
-    IonBackButton,
-    IonTitle,
-    FormsModule,
-    RouterLink,
-    IonContent,
-    IonIcon,
-    IonText,
-    IonButton,
-    IonModal,
-    FormsModule,
-    ReactiveFormsModule,
-    IonRadio,
-    IonRadioGroup,
-    IonRefresher,
-    IonRefresherContent
-  ],
-  providers: [
-    DocumentViewer,
-    FileOpener,
-    FileTransfer,
-    File,
-    HTTP
-  ]
 })
 export class BudgetListPage implements OnInit, AfterViewInit {
   @ViewChild(IonModal) modal!: IonModal;
@@ -164,7 +135,7 @@ export class BudgetListPage implements OnInit, AfterViewInit {
     }, 2000);
   }
 
-  async ApprovalList( typename: string, userId: number) {
+  async ApprovalList(typename: string, userId: number) {
     debugger
     // let SaveData: any = [];
     // SaveData["typename"] = this.typename;
@@ -175,6 +146,6 @@ export class BudgetListPage implements OnInit, AfterViewInit {
     if (res) {
       this.budgetList = res;
     }
-     }
+  }
 
 }

@@ -9,18 +9,6 @@ import { RouterLink } from '@angular/router';
   selector: 'app-budget-detail',
   templateUrl: './budget-detail.page.html',
   styleUrls: ['./budget-detail.page.scss'],
-  standalone: true,
-  imports: [
-    IonHeader,
-    IonToolbar,
-    IonButtons,
-    IonBackButton,
-    IonTitle,
-    FormsModule,
-    RouterLink,
-    IonContent,
-    IonIcon
-  ]
 })
 export class BudgetDetailPage implements OnInit {
 
