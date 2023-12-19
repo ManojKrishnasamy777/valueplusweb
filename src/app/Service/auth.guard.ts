@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivateFn, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
-import { CommonHelperService } from 'src/Helper/common-helper.service';
+import { CommonHelperService } from 'src/app/Helper/common-helper.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +13,8 @@ export class AuthGuard {
     private router: Router,
   ) { }
   async canActivate(): Promise<boolean> {
-    this.userInfo = await this.helper.getUserInfo();
-    if(!this.userInfo) {
+    this.userInfo = await this.helper.GetUserInfo();
+    if (!this.userInfo) {
       this.router.navigate(['']);
       return false;
     }
@@ -27,5 +27,5 @@ export class AuthGuard {
 }
 
 export const canActivateTeam: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
-      return inject(AuthGuard).canActivate();
+  return inject(AuthGuard).canActivate();
 };

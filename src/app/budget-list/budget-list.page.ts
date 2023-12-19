@@ -12,8 +12,8 @@ import { FileOpener } from '@awesome-cordova-plugins/file-opener/ngx';
 import { FileTransfer, FileTransferObject } from '@awesome-cordova-plugins/file-transfer/ngx';
 import { File } from '@awesome-cordova-plugins/file/ngx';
 import { HTTP } from '@awesome-cordova-plugins/http/ngx';
-import { CommonHelperService } from 'src/Helper/common-helper.service';
-import { CommonService } from 'src/Service/common.service';
+import { CommonHelperService } from 'src/app/Helper/common-helper.service';
+import { CommonService } from 'src/app/Service/common.service';
 
 @Component({
   selector: 'app-budget-list',
