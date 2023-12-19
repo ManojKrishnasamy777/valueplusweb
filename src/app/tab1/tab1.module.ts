@@ -4,10 +4,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { DashboardRoutingModule } from './dashboard--routing.module';
+import { Tab1RoutingModule } from './tab1-routing.module';
 import { IonBackButton, IonButtons, IonContent, IonHeader, IonIcon, IonTitle, IonToolbar } from '@ionic/angular/standalone';
 
-import { DashboardPage } from './dashboard.page';
+import { Tab1Page } from './tab1.page';
 import { RouterLink } from '@angular/router';
 
 @NgModule({
@@ -21,9 +21,9 @@ import { RouterLink } from '@angular/router';
         RouterLink,
         IonContent,
         IonIcon,
-        DashboardRoutingModule,
+        Tab1RoutingModule,
         ReactiveFormsModule
     ],
     declarations: []
 })
-export class DashboardModule { }
+export class Tab1Module { }
