@@ -23,8 +23,11 @@ const routes: Routes = [
   {
     path: 'budget-list',
     loadChildren: () => import('./budget-list/budget-list.module').then(m => m.BudgetListModule)
+  },
+  {
+    path: 'dashboard',
+    loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
   }
-
 ];
 
 @NgModule({
