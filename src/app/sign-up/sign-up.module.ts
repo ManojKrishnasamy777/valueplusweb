@@ -9,21 +9,17 @@ import { IonBackButton, IonButtons, IonContent, IonHeader, IonIcon, IonTitle, Io
 
 import { SignUpPage } from './sign-up.page';
 import { RouterLink } from '@angular/router';
+import { DatePickerModule } from '../shared/date-picker/date-picker.module';
 
 @NgModule({
     imports: [
-        IonHeader,
-        IonToolbar,
-        IonButtons,
-        IonBackButton,
-        IonTitle,
+        CommonModule,
         FormsModule,
-        RouterLink,
-        IonContent,
-        IonIcon,
+        IonicModule,
         SignUpRoutingModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        DatePickerModule
     ],
-    declarations: []
+    declarations: [SignUpPage]
 })
 export class SignUpModule { }

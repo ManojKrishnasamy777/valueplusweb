@@ -1,0 +1,52 @@
+.custom-profile-container {
+    background-color: #fff;
+    padding: 20px;
+    min-width: 300px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .custom-profile-title {
+    font-size: 24px;
+    text-align: center;
+  }
+  
+  .custom-profile-image-container {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .custom-profile-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+  }
+  
+  .custom-profile-details {
+    margin-top: 20px;
+  }
+  
+  .custom-detail-item {
+    display: flex;
+    align-items: center;
+  }
+  
+  .custom-icon {
+    font-size: 17px;
+    color: #000;
+    font-weight: 900;
+    margin-right: 10px;
+  }
+  
+  .custom-detail-text {
+    font-size: 13px;
+    color: #000;
+    font-weight: 900;
+  }
+  
+  .custom-avatar-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
+  

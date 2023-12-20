@@ -13,29 +13,15 @@ import { HTTP } from '@awesome-cordova-plugins/http/ngx';
 
 import { BudgetListPage } from './budget-list.page';
 import { RouterLink } from '@angular/router';
+import { IonicModule } from '@ionic/angular';
 
 @NgModule({
     imports: [
         CommonModule,
-        IonHeader,
-        IonToolbar,
-        IonButtons,
-        IonBackButton,
-        IonTitle,
         FormsModule,
-        RouterLink,
-        IonContent,
-        IonIcon,
-        IonText,
-        IonButton,
-        IonModal,
-        FormsModule,
+        IonicModule,
         ReactiveFormsModule,
-        IonRadio,
-        IonRadioGroup,
-        IonRefresher,
-        IonRefresherContent,
-        BudgetListRoutingModule,
+        BudgetListRoutingModule
     ],
     providers: [
         DocumentViewer,
@@ -43,7 +29,8 @@ import { RouterLink } from '@angular/router';
         FileTransfer,
         File,
         HTTP
-    ]
+    ],
+    declarations: [BudgetListPage]
 
 })
 export class BudgetListModule { }

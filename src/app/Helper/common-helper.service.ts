@@ -8,12 +8,6 @@ import * as CryptoJS from 'crypto-js';
   providedIn: 'root'
 })
 export class CommonHelperService {
-  DeleteAllLocalStorage() {
-    throw new Error('Method not implemented.');
-  }
-  redirectTo(arg0: string) {
-    throw new Error('Method not implemented.');
-  }
   ApiURL: string;
   StorageName: string;
   userInfoData: any;
@@ -24,7 +18,7 @@ export class CommonHelperService {
     private router: Router,
   ) {
     this.ApiURL = environment.API_URL;
-    this.StorageName = 'BJP';
+    this.StorageName = 'CarHiring';
   }
 
   GetUserInfo(): any {
@@ -75,7 +69,21 @@ export class CommonHelperService {
     this.router.navigate(['']);
   }
 
+  EncryptWithSecrectKey(text: string) {
+    if (text == null)
+      return text;
+    var OriginalKey = CryptoJS.AES.encrypt(String(text), environment.SECERT_KEY).toString();
+    var DuplicateKey = CryptoJS.enc.Base64.parse(OriginalKey);
+    return DuplicateKey.toString(CryptoJS.enc.Hex);
+  }
 
+  DecryptWithSecrectKey(text: string) {
+    if (text == null)
+      return text;
+    var DuplicateKey = CryptoJS.enc.Hex.parse(text);
+    var OriginalKey = DuplicateKey.toString(CryptoJS.enc.Base64);
+    return CryptoJS.AES.decrypt(OriginalKey, environment.SECERT_KEY).toString(CryptoJS.enc.Utf8);
+  }
 
   SetLocalStorage(name: string, data: any, jsonformat: boolean = true) {
     if (name == this.StorageName) {
@@ -110,6 +118,11 @@ export class CommonHelperService {
     var DuplicateKey = CryptoJS.enc.Hex.parse(text);
     var OriginalKey = DuplicateKey.toString(CryptoJS.enc.Base64);
     return CryptoJS.AES.decrypt(OriginalKey, environment.API_URL).toString(CryptoJS.enc.Utf8);
+  }
+
+  RefreshredirectTo(uri: string) {
+    this.router.navigateByUrl('/DummyComponent', { skipLocationChange: true }).then(() =>
+      this.router.navigateByUrl(uri));
   }
 
 }

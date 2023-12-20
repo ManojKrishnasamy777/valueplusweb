@@ -4,26 +4,18 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ProfileRoutingModule } from './profile-routing.module';
-import { IonBackButton, IonButtons, IonContent, IonHeader, IonIcon, IonTitle, IonToolbar } from '@ionic/angular/standalone';
+import { profilePageRoutingModule } from './profile-routing.module';
 
-import { ProfilePage } from './profile.page';
-import { RouterLink } from '@angular/router';
+import { profilePage } from './profile.page';
 
 @NgModule({
-    imports: [
-        IonHeader,
-        IonToolbar,
-        IonButtons,
-        IonBackButton,
-        IonTitle,
-        FormsModule,
-        RouterLink,
-        IonContent,
-        IonIcon,
-        ProfileRoutingModule,
-        ReactiveFormsModule
-    ],
-    declarations: []
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    profilePageRoutingModule,
+    ReactiveFormsModule
+  ],
+  declarations: [profilePage]
 })
-export class ProfileModule { }
+export class profilePageModule {}

@@ -9,16 +9,22 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule)
+    loadChildren: () => import('./sign-up/sign-up.module').then(m => m.SignUpModule)
   },
   {
     path: '',
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
   },
+
   {
-    path: 'inspection/:id',
-    loadChildren: () => import('./inspection/inspection.module').then(m => m.InspectionPageModule)
+    path: 'budget-detail',
+    loadChildren: () => import('./budget-detail/budget-detail.module').then(m => m.BudgetDetailModule)
+  },
+  {
+    path: 'budget-list',
+    loadChildren: () => import('./budget-list/budget-list.module').then(m => m.BudgetListModule)
   }
+
 ];
 
 @NgModule({

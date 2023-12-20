@@ -9,21 +9,17 @@ import { IonBackButton, IonButtons, IonContent, IonHeader, IonIcon, IonTitle, Io
 
 import { BudgetDetailPage } from './budget-detail.page';
 import { RouterLink } from '@angular/router';
+import { DatePickerModule } from '../shared/date-picker/date-picker.module';
 
 @NgModule({
     imports: [
-        IonHeader,
-        IonToolbar,
-        IonButtons,
-        IonBackButton,
-        IonTitle,
+        CommonModule,
         FormsModule,
-        RouterLink,
-        IonContent,
-        IonIcon,
-        BudgetDetailRoutingModule,
-        ReactiveFormsModule
+        IonicModule,
+        ReactiveFormsModule,
+        DatePickerModule,
+        BudgetDetailRoutingModule
     ],
-    declarations: []
+    declarations: [BudgetDetailPage]
 })
 export class BudgetDetailModule { }
