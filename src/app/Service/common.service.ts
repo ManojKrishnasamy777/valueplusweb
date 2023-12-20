@@ -20,6 +20,7 @@ export class CommonService {
   }
 
   public CommonPost(model: any, UrlName: string) {
+    debugger
     return lastValueFrom(this.httpClient.post(`${this.helper.ApiURL}/${UrlName}`, Object.assign({}, model)));
   }
 

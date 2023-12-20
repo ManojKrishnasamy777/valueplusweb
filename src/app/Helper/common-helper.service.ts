@@ -69,21 +69,21 @@ export class CommonHelperService {
     this.router.navigate(['']);
   }
 
-  EncryptWithSecrectKey(text: string) {
-    if (text == null)
-      return text;
-    var OriginalKey = CryptoJS.AES.encrypt(String(text), environment.SECERT_KEY).toString();
-    var DuplicateKey = CryptoJS.enc.Base64.parse(OriginalKey);
-    return DuplicateKey.toString(CryptoJS.enc.Hex);
-  }
+  // EncryptWithSecrectKey(text: string) {
+  //   if (text == null)
+  //     return text;
+  //   var OriginalKey = CryptoJS.AES.encrypt(String(text), environment.SECERT_KEY).toString();
+  //   var DuplicateKey = CryptoJS.enc.Base64.parse(OriginalKey);
+  //   return DuplicateKey.toString(CryptoJS.enc.Hex);
+  // }
 
-  DecryptWithSecrectKey(text: string) {
-    if (text == null)
-      return text;
-    var DuplicateKey = CryptoJS.enc.Hex.parse(text);
-    var OriginalKey = DuplicateKey.toString(CryptoJS.enc.Base64);
-    return CryptoJS.AES.decrypt(OriginalKey, environment.SECERT_KEY).toString(CryptoJS.enc.Utf8);
-  }
+  // DecryptWithSecrectKey(text: string) {
+  //   if (text == null)
+  //     return text;
+  //   var DuplicateKey = CryptoJS.enc.Hex.parse(text);
+  //   var OriginalKey = DuplicateKey.toString(CryptoJS.enc.Base64);
+  //   return CryptoJS.AES.decrypt(OriginalKey, environment.SECERT_KEY).toString(CryptoJS.enc.Utf8);
+  // }
 
   SetLocalStorage(name: string, data: any, jsonformat: boolean = true) {
     if (name == this.StorageName) {

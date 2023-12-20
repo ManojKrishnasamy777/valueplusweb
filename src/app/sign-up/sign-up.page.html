@@ -17,22 +17,21 @@
           <img src="../../assets/icon/icon.png" width="120">
         </div>
       </div>
-      <form class="sign-in-form mx-auto">
+      <div class="sign-in-form mx-auto">
         <div class="mb-4">
-          <input class="cus-form-control" placeholder="Server Name" type="text">
+          <input class="cus-form-control" [(ngModel)]="SignupData.server_name" placeholder="Server Name" type="text">
         </div>
         <div class="mb-4">
-          <input class="cus-form-control" placeholder="Mobile No" type="text">
+          <input class="cus-form-control" [(ngModel)]="SignupData.mobileNo" placeholder="Mobile No" type="text">
         </div>
         <div class="mb-4">
-
-          <input class="cus-form-control" placeholder="User Name" type="text">
+          <input class="cus-form-control" [(ngModel)]="SignupData.loginName" placeholder="User Name" type="text">
         </div>
-        <ion-button expand="block" color="primary" routerLink="/dashboard">Submit</ion-button>
-      </form>
+        <ion-button expand="block" color="primary" (click)="Signup()">Submit</ion-button>
+      </div>
     </div>
   </div>
-  <ion-icon name="mail-outline"></ion-icon>
+  <!-- <ion-icon name="mail-outline"></ion-icon>
   <ion-icon name="accessibility-outline"></ion-icon>
-  <ion-icon name="heart"></ion-icon>
+  <ion-icon name="heart"></ion-icon> -->
 </ion-content>
