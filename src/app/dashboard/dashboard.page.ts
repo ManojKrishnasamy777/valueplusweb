@@ -9,7 +9,7 @@ import { ActionSheetController, IonicModule, RefresherEventDetail } from '@ionic
 import { CommonService } from '../Service/common.service';
 import { CommonHelperService } from '../Helper/common-helper.service';
 import { CommonHelper } from '../Helper/CommonHelper';
-
+import * as _ from 'lodash';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.page.html',
@@ -27,6 +27,8 @@ export class DashboardPage implements OnInit {
   NotificationList: any = [];
   ApprovalCount: number = 0;
   NotificationCount: number = 0;
+  TotalNoOfRowsApproved: number = 0;
+  TotalNoOfRowsNotification: number = 0;
   public environmentInjector = inject(EnvironmentInjector);
   constructor(
     private router: Router,
@@ -66,11 +68,19 @@ export class DashboardPage implements OnInit {
   async GetDashboardList() {
     debugger
     let res = await this.httpService.GetAll('v1/Dashboard/List');
-    if (res) 
-    {
+    if (res) {
       this.ApprovalList = res.filter((o: { name: string; }) => o.name == 'Approval');
+
+      this.TotalNoOfRowsApproved = _.sumBy(this.ApprovalList, (obj: { noofRows: any; }) => {
+        let sum = +(obj.noofRows);
+        return _.round(sum, 2);
+      });
       //this.ApprovalCount = this.ApprovalList.reduce((a :number, b:number) => a += Number(b.noofRows), 0);
       this.NotificationList = res.filter((o: { name: string; }) => o.name == 'Notification');
+      this.TotalNoOfRowsNotification = _.sumBy(this.NotificationList, (obj: { noofRows: any; }) => {
+        let sum = +(obj.noofRows);
+        return _.round(sum, 2);
+      });
     }
   }
 
@@ -78,7 +88,7 @@ export class DashboardPage implements OnInit {
     debugger
     let UserId = 3;
     TypeName;
-    this.commonHelper.redirectTo("/budgetlist/" + UserId + '/' + TypeName );
+    this.commonHelper.redirectTo("/budgetlist/" + UserId + '/' + TypeName);
   }
 
 }

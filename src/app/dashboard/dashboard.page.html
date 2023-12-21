@@ -33,19 +33,21 @@
   </ion-refresher>
   <ion-accordion-group>
     <ion-accordion toggleIconSlot="start">
-      <ion-item slot="header" style="background-color: #3E4095;border-top-right-radius: 10px;border-top-left-radius: 10px;">
-        <ion-label>Approvals
-        </ion-label>
-      </ion-item>
-      <div class="ion-padding" slot="content">
-        <div class="text-white" style="border-radius: 10px;" > 
-          <div class="d-flex flex-row align-items-center justify-content-between p-3"
-            style="background-color: #3E4095;border-top-right-radius: 10px;border-top-left-radius: 10px;" >
-            <span>Approvals</span>
-            <span>{{ApprovalCount }}</span>
+      <ion-item slot="header" color="red"
+        style="background: #3E4095;border-top-right-radius: 10px;border-top-left-radius: 10px;">
+        <div class="col-12 row">
+          <div class="col-6">
+            <span style="color: white;">Approvals</span>
           </div>
-          <div class="p-3"
-            style="background-color: rgba(102, 159, 255, 0.28);" *ngFor="let approval of ApprovalList">
+          <div class="col-6" style="text-align: end;">
+            <span style="color: white;">{{TotalNoOfRowsApproved }}</span>
+          </div>
+        </div>
+      </ion-item>
+      <div class="" slot="content">
+        <div class="text-white" style="border-radius: 10px;">
+
+          <div class="p-3" style="background-color: rgba(102, 159, 255, 0.28);" *ngFor="let approval of ApprovalList">
             <div (click)="Budget(approval.type)"
               class="d-flex flex-row align-items-center justify-content-between mb-2 text-black cursor-pointer">
               <span>{{approval.type}}</span>
@@ -57,19 +59,22 @@
       </div>
     </ion-accordion>
     <ion-accordion toggleIconSlot="start">
-      <ion-item slot="header" color="light">
-        <ion-label>Notification
-        </ion-label>
-      </ion-item>
-      <div class="ion-padding" slot="content">
-        <div class="text-white" style="border-radius: 10px;">
-          <div class="d-flex flex-row align-items-center justify-content-between p-3 rounded-top-10 cu-bg-primary">
-            <span>Notification</span>
-            <span>{{NotificationCount}}</span>
+      <ion-item slot="header" color="red" style="background: #3E4095;">
+        <div class="col-12 row">
+          <div class="col-6">
+            <span style="color: white;">Notification</span>
           </div>
-          <div class="p-3"
-          style="background-color: rgba(102, 159, 255, 0.28);" *ngFor="let notification of NotificationList">
-            <div (click)="Budget(notification.type)" class="d-flex flex-row align-items-center justify-content-between mb-2 text-black">
+          <div class="col-6" style="text-align: end;">
+            <span style="color: white;">{{TotalNoOfRowsNotification}}</span>
+          </div>
+        </div>
+      </ion-item>
+      <div class="" slot="content">
+        <div class="text-white" style="border-radius: 10px;">
+          <div class="p-3" style="background-color: rgba(102, 159, 255, 0.28);"
+            *ngFor="let notification of NotificationList">
+            <div (click)="Budget(notification.type)"
+              class="d-flex flex-row align-items-center justify-content-between mb-2 text-black">
               <span>{{notification.type}} </span>
               <span class="flex-grow-1 mx-3 dotted-line"></span>
               <span>{{notification.noofRows}}</span>
