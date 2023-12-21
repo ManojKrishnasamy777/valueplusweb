@@ -6,6 +6,9 @@ import { arrowForwardOutline } from 'ionicons/icons';
 import { Router, RouterLink } from '@angular/router';
 import { IonAvatar, IonContent, IonHeader, IonTitle, IonToolbar, IonBackButton, IonButton, IonButtons, IonRefresher, IonRefresherContent, IonAccordionGroup, IonAccordion, IonItem, IonLabel } from '@ionic/angular/standalone';
 import { ActionSheetController, IonicModule, RefresherEventDetail } from '@ionic/angular';
+import { CommonService } from '../Service/common.service';
+import { CommonHelperService } from '../Helper/common-helper.service';
+import { CommonHelper } from '../Helper/CommonHelper';
 
 @Component({
   selector: 'app-dashboard',
@@ -20,16 +23,24 @@ import { ActionSheetController, IonicModule, RefresherEventDetail } from '@ionic
   ],
 })
 export class DashboardPage implements OnInit {
+  ApprovalList: any = [];
+  NotificationList: any = [];
+  ApprovalCount: number = 0;
+  NotificationCount: number = 0;
   public environmentInjector = inject(EnvironmentInjector);
   constructor(
     private router: Router,
+    private httpService: CommonService,
+    private helper: CommonHelperService,
+    private commonHelper: CommonHelper
 
   ) {
     addIcons({ arrowForwardOutline });
   }
 
   // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
-  ngOnInit() {
+  async ngOnInit() {
+    await this.GetDashboardList();
   }
 
   ionViewWillEnter() {
@@ -50,6 +61,24 @@ export class DashboardPage implements OnInit {
       // Any calls to load data go here
       event.target.complete();
     }, 2000);
+  }
+
+  async GetDashboardList() {
+    debugger
+    let res = await this.httpService.GetAll('v1/Dashboard/List');
+    if (res) 
+    {
+      this.ApprovalList = res.filter((o: { name: string; }) => o.name == 'Approval');
+      //this.ApprovalCount = this.ApprovalList.reduce((a :number, b:number) => a += Number(b.noofRows), 0);
+      this.NotificationList = res.filter((o: { name: string; }) => o.name == 'Notification');
+    }
+  }
+
+  Budget(TypeName: string) {
+    debugger
+    let UserId = 3;
+    TypeName;
+    this.commonHelper.redirectTo("/budgetlist/" + UserId + '/' + TypeName );
   }
 
 }

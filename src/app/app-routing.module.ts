@@ -21,7 +21,7 @@ const routes: Routes = [
     loadChildren: () => import('./budget-detail/budget-detail.module').then(m => m.BudgetDetailModule)
   },
   {
-    path: 'budget-list',
+    path: 'budgetlist/:userid/:typename',
     loadChildren: () => import('./budget-list/budget-list.module').then(m => m.BudgetListModule)
   },
   {

@@ -10,9 +10,9 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button default-href="/walkthrough"></ion-back-button>
+      <ion-back-button default-href="/dashboard"></ion-back-button>
     </ion-buttons>
-    <ion-title>{{type}} List</ion-title>
+    <ion-title>Budget List</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -34,7 +34,7 @@
     <div class="d-flex flex-row align-items-center justify-content-between mb-2">
       <span class="text-sub-title">Red Date</span>
       <span class="flex-grow-1 mx-3 dotted-line"></span>
-      <span class="text-title">{{budget.redDt | date:'dd/MM/YYYY'}}</span>
+      <span class="text-title">{{budget.reqDt | date:'dd/MM/YYYY'}}</span>
     </div>
 
     <div class="d-flex flex-row align-items-center justify-content-between mb-2">

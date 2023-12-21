@@ -20,7 +20,7 @@ import { CommonService } from 'src/app/Service/common.service';
   templateUrl: './budget-list.page.html',
   styleUrls: ['./budget-list.page.scss'],
 })
-export class BudgetListPage implements OnInit, AfterViewInit {
+export class BudgetListPage implements OnInit {
   @ViewChild(IonModal) modal!: IonModal;
   commentsFc = new FormControl('');
   isModalOpen: boolean = false;
@@ -29,8 +29,8 @@ export class BudgetListPage implements OnInit, AfterViewInit {
   //@ts-ignore
   CommendForm: FormGroup;
   budgetList: any = [];
-  typename: string = 'Purchase%20Rate';
-  userId: number = 3;
+  TypeName: string = '';
+  UserId: number = 0;
   constructor(
     private route: ActivatedRoute,
     private document: DocumentViewer,
@@ -50,9 +50,13 @@ export class BudgetListPage implements OnInit, AfterViewInit {
 
   // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
   async ngOnInit() {
-    this.type = this.route.snapshot.queryParams['type'];
-    console.log(this.route.snapshot.queryParams['type']);
-    await this.ApprovalList(this.typename, this.userId);
+    debugger
+    this.UserId = this.route.snapshot.params["userid"];
+    this.TypeName = this.route.snapshot.params["typename"];
+
+    // this.type = this.route.snapshot.queryParams['type'];
+    // console.log(this.route.snapshot.queryParams['type']);
+    await this.ApprovalList(this.TypeName, this.UserId);
   }
 
   ngAfterViewInit() {
@@ -140,8 +144,8 @@ export class BudgetListPage implements OnInit, AfterViewInit {
     // let SaveData: any = [];
     // SaveData["typename"] = this.typename;
     // SaveData["userId"] = this.userId;
-    typename = this.typename;
-    userId = this.userId
+    typename = this.TypeName;
+    userId = this.UserId
     let res = await this.httpService.GetAll(`v1/Approval/ApprovalList?typename=${typename}&userId=${userId}`);
     if (res) {
       this.budgetList = res;

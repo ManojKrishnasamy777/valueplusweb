@@ -6,7 +6,7 @@ import { Router, RouterLink } from '@angular/router';
 import { IonBackButton, IonCard, IonButton, IonButtons, IonContent, IonHeader, IonIcon, IonModal, IonText, IonTitle, IonToolbar, IonRadio, IonRadioGroup, IonRefresher, IonRefresherContent } from '@ionic/angular/standalone';
 import { CommonService } from '../Service/common.service';
 import { CommonHelperService } from '../Helper/common-helper.service';
-import jwt_decode from "jwt-decode";
+// import jwt_decode from "jwt-decode";
 
 @Component({
   selector: 'app-sign-up',

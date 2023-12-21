@@ -33,34 +33,24 @@
   </ion-refresher>
   <ion-accordion-group>
     <ion-accordion toggleIconSlot="start">
-      <ion-item slot="header" color="light">
+      <ion-item slot="header" style="background-color: #3E4095;border-top-right-radius: 10px;border-top-left-radius: 10px;">
         <ion-label>Approvals
         </ion-label>
       </ion-item>
       <div class="ion-padding" slot="content">
-        <div class="text-white" style="border-radius: 10px;">
+        <div class="text-white" style="border-radius: 10px;" > 
           <div class="d-flex flex-row align-items-center justify-content-between p-3"
-            style="background-color: #3E4095;border-top-right-radius: 10px;border-top-left-radius: 10px;">
+            style="background-color: #3E4095;border-top-right-radius: 10px;border-top-left-radius: 10px;" >
             <span>Approvals</span>
-            <span>20</span>
+            <span>{{ApprovalCount}}</span>
           </div>
           <div class="p-3"
-            style="background-color: rgba(102, 159, 255, 0.28);border-bottom-right-radius: 10px;border-bottom-left-radius: 10px;">
-            <div routerLink="/budget-list" [queryParams]="{ type: 'Budget' }"
+            style="background-color: rgba(102, 159, 255, 0.28);" *ngFor="let approval of ApprovalList">
+            <div (click)="Budget(approval.type)"
               class="d-flex flex-row align-items-center justify-content-between mb-2 text-black cursor-pointer">
-              <span>Budget</span>
+              <span>{{approval.type}}</span>
               <span class="flex-grow-1 mx-3 dotted-line"></span>
-              <span>5</span>
-            </div>
-            <div class="d-flex flex-row align-items-center justify-content-between mb-2 text-black">
-              <span>Rate</span>
-              <span class="flex-grow-1 mx-3 dotted-line"></span>
-              <span>5</span>
-            </div>
-            <div class="d-flex flex-row align-items-center justify-content-between mb-2 text-black">
-              <span>Stack Allocation</span>
-              <span class="flex-grow-1 mx-3 dotted-line"></span>
-              <span>6</span>
+              <span>{{approval.noofRows}}</span>
             </div>
           </div>
         </div>
@@ -75,23 +65,14 @@
         <div class="text-white" style="border-radius: 10px;">
           <div class="d-flex flex-row align-items-center justify-content-between p-3 rounded-top-10 cu-bg-primary">
             <span>Notification</span>
-            <span>20</span>
+            <span>{{NotificationCount}}</span>
           </div>
-          <div class="p-3 rounded-bottom-10" style="background-color: rgba(102, 159, 255, 0.28);">
-            <div class="d-flex flex-row align-items-center justify-content-between mb-2 text-black">
-              <span>View </span>
+          <div class="p-3"
+          style="background-color: rgba(102, 159, 255, 0.28);" *ngFor="let notification of NotificationList">
+            <div (click)="Budget(notification.type)" class="d-flex flex-row align-items-center justify-content-between mb-2 text-black">
+              <span>{{notification.type}} </span>
               <span class="flex-grow-1 mx-3 dotted-line"></span>
-              <span>5</span>
-            </div>
-            <div class="d-flex flex-row align-items-center justify-content-between mb-2 text-black">
-              <span>Approval</span>
-              <span class="flex-grow-1 mx-3 dotted-line"></span>
-              <span>5</span>
-            </div>
-            <div class="d-flex flex-row align-items-center justify-content-between mb-2 text-black">
-              <span>Reject</span>
-              <span class="flex-grow-1 mx-3 dotted-line"></span>
-              <span>6</span>
+              <span>{{notification.noofRows}}</span>
             </div>
           </div>
         </div>
