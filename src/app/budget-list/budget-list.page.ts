@@ -60,12 +60,12 @@ export class BudgetListPage implements OnInit {
   }
 
   ngAfterViewInit() {
-    this.modal.ionModalDidDismiss.subscribe((event: any) => {
-      const dismissRole = event.detail.role;
-      if (dismissRole == 'backdrop' || dismissRole == 'gesture') {
-        this.isModalOpen = false;
-      }
-    });
+    // this.modal.ionModalDidDismiss.subscribe((event: any) => {
+    //   const dismissRole = event.detail.role;
+    //   if (dismissRole == 'backdrop' || dismissRole == 'gesture') {
+    //     this.isModalOpen = false;
+    //   }
+    // });
   }
 
   openAppOrRejModal(isApprove: boolean = true) {
