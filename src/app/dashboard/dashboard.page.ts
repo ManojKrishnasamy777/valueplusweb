@@ -55,7 +55,6 @@ export class DashboardPage implements OnInit {
   }
 
   async GetDashboardList() {
-    debugger
     let UserData: any = {};
     UserData = this.helper.GetUserInfo();
     console.log(UserData)
@@ -75,7 +74,6 @@ export class DashboardPage implements OnInit {
   }
 
   Budget(TypeName: string) {
-    debugger
     let UserData: any = {};
     UserData = this.helper.GetUserInfo();
     TypeName;
@@ -83,7 +81,6 @@ export class DashboardPage implements OnInit {
   }
 
   NotificationRedirect(TypeName: string) {
-    debugger
     let UserData: any = {};
     UserData = this.helper.GetUserInfo();
     TypeName;

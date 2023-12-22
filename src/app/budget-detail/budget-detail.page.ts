@@ -47,7 +47,6 @@ export class BudgetDetailPage implements OnInit {
   }
 
   async NotificationlList(typename: string, userId: number) {
-    debugger
     typename = this.TypeName;
     userId = this.UserId;
     let res = await this.httpService.GetAll(`v1/Notification/NotificationList?typename=${typename}&userId=${userId}`);
@@ -63,7 +62,6 @@ export class BudgetDetailPage implements OnInit {
   }
 
   async openPDF() {
-    debugger
     const filePath = this.file.dataDirectory + 'file-sample_150kB.pdf';
     this.nativeHTTP.downloadFile(`https://www.africau.edu/images/default/sample.pdf`, {},
       {
@@ -79,7 +77,6 @@ export class BudgetDetailPage implements OnInit {
 
 
   async NotificationView(id:number) {
-    debugger
     let res: any;
       if (this.NotificationData) {
         res = await this.httpService.CommonPut({},`v1/Notification/NotificationUpdate/${id}`);

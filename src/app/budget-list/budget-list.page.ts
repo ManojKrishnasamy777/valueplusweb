@@ -53,14 +53,12 @@ export class BudgetListPage implements OnInit {
   }
 
   async ngOnInit() {
-    debugger
     this.UserId = this.route.snapshot.params["userid"];
     this.TypeName = this.route.snapshot.params["typename"];
     await this.ApprovalList(this.TypeName, this.UserId);
   }
 
   async openAppOrRejModal(id: number) {
-    debugger
     this.CommendForm = this.fb.group({
       approvalStatus: ['', [Validators.required,]],
       approvalComments: ['', [Validators.required,]]
@@ -84,9 +82,19 @@ export class BudgetListPage implements OnInit {
   }
 
   async openPDF() {
-    debugger
+     // "cordova-plugin-file-transfer": "github:apache/cordova-plugin-file-transfer",
+    // this.platform.ready().then(async () => {
+    //   const fileTransfer: FileTransferObject = await this.transfer.create();
+    //   fileTransfer.download(
+    //     'https://file-examples.com/storage/febf69dcf3656dfd992b0fa/2017/10/file-sample_150kB.pdf',
+    //     this.file.dataDirectory + 'muthu_kumaran_06_dec_2023').then((entry) => {
+    //       console.log('download complete: ' + entry.toURL());
+    //     }, (error: any) => {
+    //       // handle error
+    //     });
+    // });
     const filePath = this.file.dataDirectory + 'file-sample_150kB.pdf';
-    this.nativeHTTP.downloadFile(`https://www.africau.edu/images/default/sample.pdf`, {},
+    this.nativeHTTP.downloadFile(`v1/Approval/ApprovalList?typename=${ this.TypeName}&userId=${this.UserId}`, {},
       {
       },
       filePath).then(response => {
@@ -104,7 +112,6 @@ export class BudgetListPage implements OnInit {
   }
 
   async ApprovalList(typename: string, userId: number) {
-    debugger
     typename = this.TypeName;
     userId = this.UserId
     let res = await this.httpService.GetAll(`v1/Approval/ApprovalList?typename=${typename}&userId=${userId}`);
@@ -114,7 +121,6 @@ export class BudgetListPage implements OnInit {
   }
 
   async Approval() {
-    debugger
     if (this.CommendForm.valid == true) {
       let res: any;
       let SaveData: any = {}
