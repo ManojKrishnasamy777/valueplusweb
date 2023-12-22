@@ -13,7 +13,7 @@ import { ActionSheetController, IonicModule } from '@ionic/angular';
 
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-profile',
   templateUrl: './profile.page.html',
   styleUrls: ['./profile.page.scss'],
   styles: [

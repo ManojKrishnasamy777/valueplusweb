@@ -40,19 +40,9 @@ export class DashboardPage implements OnInit {
     addIcons({ arrowForwardOutline });
   }
 
-  // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
   async ngOnInit() {
     await this.GetDashboardList();
   }
-
-  ionViewWillEnter() {
-    // alert('ionViewWillEnter');
-  }
-
-  ionViewDidEnter() {
-    // alert('ionViewDidEnter');
-  }
-
 
   redirect() {
     this.router.navigate(['/booking'], { replaceUrl: true });
@@ -60,22 +50,22 @@ export class DashboardPage implements OnInit {
 
   handleRefresh(event: any) {
     setTimeout(async () => {
-      // Any calls to load data go here
       event.target.complete();
     }, 2000);
   }
 
   async GetDashboardList() {
     debugger
-    let res = await this.httpService.GetAll('v1/Dashboard/List');
+    let UserData: any = {};
+    UserData = this.helper.GetUserInfo();
+    console.log(UserData)
+    let res = await this.httpService.GetAll(`v1/Dashboard/List?userId=${UserData.userId}`);
     if (res) {
       this.ApprovalList = res.filter((o: { name: string; }) => o.name == 'Approval');
-
       this.TotalNoOfRowsApproved = _.sumBy(this.ApprovalList, (obj: { noofRows: any; }) => {
         let sum = +(obj.noofRows);
         return _.round(sum, 2);
       });
-      //this.ApprovalCount = this.ApprovalList.reduce((a :number, b:number) => a += Number(b.noofRows), 0);
       this.NotificationList = res.filter((o: { name: string; }) => o.name == 'Notification');
       this.TotalNoOfRowsNotification = _.sumBy(this.NotificationList, (obj: { noofRows: any; }) => {
         let sum = +(obj.noofRows);
@@ -86,9 +76,18 @@ export class DashboardPage implements OnInit {
 
   Budget(TypeName: string) {
     debugger
-    let UserId = 3;
+    let UserData: any = {};
+    UserData = this.helper.GetUserInfo();
     TypeName;
-    this.commonHelper.redirectTo("/budgetlist/" + UserId + '/' + TypeName);
+    this.commonHelper.redirectTo("/budgetlist/" + UserData.userId + '/' + TypeName);
+  }
+
+  NotificationRedirect(TypeName: string) {
+    debugger
+    let UserData: any = {};
+    UserData = this.helper.GetUserInfo();
+    TypeName;
+    this.commonHelper.redirectTo("/budgetdetail/" + UserData.userId + '/' + TypeName);
   }
 
 }

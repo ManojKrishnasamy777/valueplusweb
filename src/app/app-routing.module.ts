@@ -17,7 +17,7 @@ const routes: Routes = [
   },
 
   {
-    path: 'budget-detail',
+    path: 'budgetdetail/:userid/:typename',
     loadChildren: () => import('./budget-detail/budget-detail.module').then(m => m.BudgetDetailModule)
   },
   {
@@ -27,6 +27,10 @@ const routes: Routes = [
   {
     path: 'dashboard',
     loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
+  },
+  {
+    path: 'profile',
+    loadChildren: () => import('./profile/profile.module').then(m => m.profileModule)
   }
 ];
 

@@ -41,6 +41,8 @@ export class SignUpPage implements OnInit {
       ResData['mobileNo'] = this.SignupData.mobileNo;
       ResData['loginName'] = this.SignupData.loginName;
       ResData['api_token'] = res.response.token;
+      ResData['userId'] = res.response.userId;
+
       this.helper.SetLocalStorage(this.helper.StorageName, ResData);
       this.helper.presentSuccessToast(res.message);
       this.router.navigate(['/dashboard'], { replaceUrl: true });
