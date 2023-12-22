@@ -82,7 +82,7 @@ export class BudgetListPage implements OnInit {
   }
 
   async openPDF() {
-     // "cordova-plugin-file-transfer": "github:apache/cordova-plugin-file-transfer",
+    // "cordova-plugin-file-transfer": "github:apache/cordova-plugin-file-transfer",
     // this.platform.ready().then(async () => {
     //   const fileTransfer: FileTransferObject = await this.transfer.create();
     //   fileTransfer.download(
@@ -93,8 +93,10 @@ export class BudgetListPage implements OnInit {
     //       // handle error
     //     });
     // });
+
+    debugger
     const filePath = this.file.dataDirectory + 'file-sample_150kB.pdf';
-    this.nativeHTTP.downloadFile(`v1/Approval/ApprovalList?typename=${ this.TypeName}&userId=${this.UserId}`, {},
+    this.nativeHTTP.downloadFile(`v1/Approval/ApprovalList?typename=${this.TypeName}&userId=${this.UserId}`, {},
       {
       },
       filePath).then(response => {
