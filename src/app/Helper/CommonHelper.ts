@@ -4,6 +4,7 @@ import { FormGroup, FormControl, ValidationErrors } from '@angular/forms';
 import { environment } from '../../environments/environment';
 import { LoadingController, ToastController } from '@ionic/angular';
 import * as CryptoJS from 'crypto-js';
+import { CommonHelperService } from './common-helper.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +14,10 @@ export class CommonHelper {
     private router: Router,
     private loadingController: LoadingController,
     private toastController: ToastController,
+    public helper: CommonHelperService
   ) {
-    this.ApiURL = environment.API_URL;
+    debugger
+    this.ApiURL = this.helper.GetUserInfo().server_name ? this.helper.GetUserInfo().server_name : environment.API_URL;
     this.StorageName = "CarHiring";
   }
   CurrentModule: string = "Invoicing";

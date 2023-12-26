@@ -6,6 +6,7 @@ import { Router, RouterLink } from '@angular/router';
 import { IonBackButton, IonCard, IonButton, IonButtons, IonContent, IonHeader, IonIcon, IonModal, IonText, IonTitle, IonToolbar, IonRadio, IonRadioGroup, IonRefresher, IonRefresherContent } from '@ionic/angular/standalone';
 import { CommonService } from '../Service/common.service';
 import { CommonHelperService } from '../Helper/common-helper.service';
+import { environment } from 'src/environments/environment';
 // import jwt_decode from "jwt-decode";
 
 @Component({
@@ -37,12 +38,11 @@ export class SignUpPage implements OnInit {
     res = await this.httpService.CommonPost(this.SignupData, "v1/Auth/Login");
     if (res.type == 'S') {
       let ResData: any = {};
-      ResData['server_name'] = this.SignupData.server_name;
+      ResData['server_name'] = this.SignupData.server_name + '/api';
       ResData['mobileNo'] = this.SignupData.mobileNo;
       ResData['loginName'] = this.SignupData.loginName;
       ResData['api_token'] = res.response.token;
       ResData['userId'] = res.response.userId;
-
       this.helper.SetLocalStorage(this.helper.StorageName, ResData);
       this.helper.presentSuccessToast(res.message);
       this.router.navigate(['/dashboard'], { replaceUrl: true });
