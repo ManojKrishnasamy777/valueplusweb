@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { Router, RouterLink } from '@angular/router';
 import { IonBackButton, IonCard, IonButton, IonButtons, IonContent, IonHeader, IonIcon, IonModal, IonText, IonTitle, IonToolbar, IonRadio, IonRadioGroup, IonRefresher, IonRefresherContent } from '@ionic/angular/standalone';
 import { CommonService } from '../Service/common.service';
 import { CommonHelperService } from '../Helper/common-helper.service';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { CommonHelper } from '../Helper/CommonHelper';
+
 import { environment } from 'src/environments/environment';
 // import jwt_decode from "jwt-decode";
 
@@ -21,19 +23,35 @@ import { environment } from 'src/environments/environment';
 })
 export class SignUpPage implements OnInit {
   SignupData: any = {};
+  //@ts-ignore
+  SigninForm: FormGroup;
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private httpService: CommonService,
-    private helper: CommonHelperService
+    private helper: CommonHelperService,
+    private formbuilder: FormBuilder,
+    private commonHelper: CommonHelper
+
   ) { }
 
   // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
-  ngOnInit() { }
+  ngOnInit() { 
+    this.SigninForm = this.formbuilder.group({
+      loginName: new FormControl('', Validators.compose([Validators.required])),
+      mobileNo: new FormControl('', Validators.compose([Validators.required])),
+      server_name: new FormControl('', Validators.compose([Validators.required]))
+    });
+  }
+
+  get fc() {
+    return this.SigninForm.controls;
+  }
 
   async Signup() {
     debugger
+    if (this.SigninForm.valid == true) {
     let res: any = {};
     res = await this.httpService.CommonPost(this.SignupData, "v1/Auth/Login");
     if (res.type == 'S') {
@@ -49,5 +67,9 @@ export class SignUpPage implements OnInit {
     }
 
   }
+  else {
+    this.commonHelper.validateAllFormFields(this.SigninForm);
+  }
+}
 
 }

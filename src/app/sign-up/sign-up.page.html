@@ -20,12 +20,24 @@
       <div class="sign-in-form mx-auto">
         <div class="mb-4">
           <input class="cus-form-control" [(ngModel)]="SignupData.server_name" placeholder="Server Name" type="text">
+          <div
+          *ngIf="fc['server_name'].errors && (fc['server_name'].touched || fc['server_name'].dirty)">
+          <small *ngIf="fc['server_name'].errors['required']"><ion-text color="danger">Server Name cannot be blank.</ion-text></small>
+        </div>
         </div>
         <div class="mb-4">
           <input class="cus-form-control" [(ngModel)]="SignupData.mobileNo" placeholder="Mobile No" type="text">
+          <div
+          *ngIf="fc['mobileNo'].errors && (fc['mobileNo'].touched || fc['mobileNo'].dirty)">
+          <small *ngIf="fc['mobileNo'].errors['required']"><ion-text color="danger">Mobile Number cannot be blank.</ion-text></small>
+        </div>
         </div>
         <div class="mb-4">
           <input class="cus-form-control" [(ngModel)]="SignupData.loginName" placeholder="User Name" type="text">
+          <div
+          *ngIf="fc['loginName'].errors && (fc['loginName'].touched || fc['loginName'].dirty)">
+          <small *ngIf="fc['loginName'].errors['required']"><ion-text color="danger">User Name cannot be blank.</ion-text></small>
+        </div>
         </div>
         <ion-button expand="block" color="primary" (click)="Signup()">Submit</ion-button>
       </div>

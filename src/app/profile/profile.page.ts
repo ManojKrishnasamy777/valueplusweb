@@ -119,5 +119,9 @@ export class profilePage implements OnInit {
       await actionSheet.present();
     }
 
+async SignOut() {
+
+}
+
 }
 
