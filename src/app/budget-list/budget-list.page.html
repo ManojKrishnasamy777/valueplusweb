@@ -1,26 +1,12 @@
-<!-- <ion-header [translucent]="true" class="ion-no-border">
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
-    </ion-buttons>
-    <ion-title color="primary" class="text-center">{{type}} List</ion-title>
-  </ion-toolbar>
-</ion-header> -->
-
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button default-href="/walkthrough"></ion-back-button>
+      <ion-back-button default-href="/dashboard"></ion-back-button>
     </ion-buttons>
-    <ion-title>{{type}} List</ion-title>
+    <ion-title>Fabric Budget List</ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content [fullscreen]="true" class="ion-padding">
-  <!-- <div class="d-flex flex-row align-items-center justify-content-between mb-3">
-    <div class="cu-text-primary fs-18 fw-medium">Budget</div>
-    <div class="cu-text-secondary fs-12">Show More</div>
-  </div> -->
   <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
@@ -30,40 +16,30 @@
       <span class="flex-grow-1 mx-3 dotted-line"></span>
       <span class="text-title">{{budget.reqNo}}</span>
     </div>
-
     <div class="d-flex flex-row align-items-center justify-content-between mb-2">
       <span class="text-sub-title">Red Date</span>
       <span class="flex-grow-1 mx-3 dotted-line"></span>
-      <span class="text-title">{{budget.redDt | date:'dd/MM/YYYY'}}</span>
+      <span class="text-title">{{budget.reqDt | date:'dd/MM/YYYY'}}</span>
     </div>
-
     <div class="d-flex flex-row align-items-center justify-content-between mb-2">
       <span class="text-sub-title">Trans No.</span>
       <span class="flex-grow-1 mx-3 dotted-line"></span>
       <span class="text-title">{{budget.txnNo }}</span>
     </div>
-
     <div class="d-flex flex-row align-items-center justify-content-between mb-2">
       <span class="text-sub-title">Reference</span>
       <span class="flex-grow-1 mx-3 dotted-line"></span>
       <span class="text-title">{{budget.reference }}</span>
     </div>
-
     <div class="d-flex flex-row align-items-center justify-content-between mb-2">
       <span class="text-sub-title">Requisitioner</span>
       <span class="flex-grow-1 mx-3 dotted-line"></span>
       <span class="text-title">{{budget.requisitioner }}</span>
     </div>
-
     <div class="d-flex flex-row justify-content-between align-items-center">
       <ion-icon slot="icon-only" src="../../assets/images/pdf-file.svg" class="fs-1" (click)="openPDF()"></ion-icon>
-      <!-- <ion-icon slot="icon-only" src="../../assets/images/pdf-file-type.svg" class="fs-1"></ion-icon>
-      <ion-icon slot="icon-only" src="../../assets/images/pdf-icon.svg" class="fs-1"></ion-icon> -->
       <div>
-        <!-- <ion-button color="success" class="ion-rounded-btn w-40 h-40" (click)="openAppOrRejModal(false,'Approve')">
-          <ion-icon slot="icon-only" name="checkbox-outline" class="fs-5"></ion-icon>
-        </ion-button> -->
-        <ion-button color="primary" (click)="openAppOrRejModal(false)">
+        <ion-button color="primary" (click)="openAppOrRejModal(budget.pId)">
           Action
         </ion-button>
       </div>
@@ -71,37 +47,27 @@
   </div>
   <ion-modal [isOpen]="isModalOpen" [initialBreakpoint]="1" [breakpoints]="[0, 0.25, 0.5, 0.75]" handleBehavior="cycle">
     <ng-template>
-      <div class="p-3">
+      <div class="p-3" [formGroup]="CommendForm">
         <div class="mt-2 mb-2" style="text-align: center;">
-          <ion-radio-group [value]="true" (ionChange)="handleChange($event)">
-            <ion-radio [value]="true" labelPlacement="end"><span style="color: green;">Approve</span></ion-radio>
-            <ion-radio [value]="false" labelPlacement="end" class="ms-4"><span
-                style="color: red;">Reject</span></ion-radio>
+          <ion-radio-group formControlName="approvalStatus" [(ngModel)]="ApprovData.approvalStatus">
+            <ion-radio value="A" labelPlacement="end"><span style="color: green;">Approve</span></ion-radio>
+            <ion-radio value="D" labelPlacement="end" class="ms-4"><span style="color: red;">Reject</span></ion-radio>
           </ion-radio-group>
         </div>
-
         <div class="mb-3" [formGroup]="CommendForm">
           <ion-icon src="../../assets/images/edit_note_black_24dp 1.svg" class="align-middle fs-3"></ion-icon>
           <label class="mb-2 ms-1" style="color: #848A94;">Remarks</label>
-          <textarea class="cus-form-control" formControlName="remarks"></textarea>
-          <!-- <div *ngIf="commentsFc.invalid && (commentsFc.dirty || commentsFc.touched)">
-            <ion-text color="danger" *ngIf="commentsFc.errors?.['required']">Please enter remarks.</ion-text>
-            <ion-text color="danger" *ngIf="commentsFc.errors?.['minlength']">Remarks must be at least 10 characters
-              long.</ion-text>
-          </div> -->
-
-          <div *ngIf="fc['remarks'].errors && (fc['remarks'].touched || fc['remarks'].dirty)">
-            <small *ngIf="fc['remarks'].errors['required']">
-              <ion-text color="danger"> Please enter remarks.</ion-text></small>
-          </div>
-          <div *ngIf="fc['remarks'].errors && (fc['remarks'].touched || fc['remarks'].dirty)">
-            <small *ngIf="fc['remarks'].errors['minlength']">
-              <ion-text color="danger"> Remarks must be at least 10 characters
-                long.</ion-text>
-            </small>
+          <textarea class="cus-form-control" formControlName="approvalComments"
+            [(ngModel)]="ApprovData.approvalComments"></textarea>
+          <div
+            *ngIf="fc['approvalComments'].errors && (fc['approvalComments'].touched || fc['approvalComments'].dirty)">
+            <small *ngIf="fc['approvalComments'].errors['required']"><ion-text color="danger">Please
+                enter Remarks.</ion-text></small>
           </div>
         </div>
-        <ion-button color="primary" expand="block" class="mb-4" (click)="appOrRejItem()">Submit</ion-button>
+        <div>
+          <ion-button color="primary" expand="block" class="mb-4" (click)="Approval()">Submit</ion-button>
+        </div>
         <div class="text-center">
           <ion-button color="primary" class="ion-rounded-btn w-40 h-40" (click)="isModalOpen = false;">
             <ion-icon slot="icon-only" name="close-outline" class="fs-4"></ion-icon>

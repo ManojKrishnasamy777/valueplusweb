@@ -39,15 +39,13 @@
         </div>
       </div>
     </div>
-  </ion-card>
-  <ion-card style="margin-top: 10px;">
     <div class="rounded-10 text-center">
       <div class="col-12 align-items-center mt-4">
         <div class="justify-content-center mb-4 ">
           <span class="text-sub-title">Do u want to update a Server</span>
         </div>
         <div class="mb-4 ms-2 me-2">
-          <ion-button routerLink="/sign-up" expand="block" color="success">
+          <ion-button routerLink="/login" expand="block" color="success">
             Edit Account Setup
           </ion-button>
         </div>
@@ -55,3 +53,16 @@
     </div>
   </ion-card>
 </ion-content>
+<ion-tab-bar slot="bottom" class="ion-no-border" style="--border: none;">
+  <ion-tab-button tab="dashboard" href="/dashboard">
+    <ion-icon aria-hidden="true" name="speedometer-outline"></ion-icon>
+    <ion-label>Dashboard</ion-label>
+  </ion-tab-button>
+  <ion-tab-button>
+    <img src="../../assets/icon/icon.png">
+  </ion-tab-button>
+  <ion-tab-button tab="profile" href="/profile">
+    <ion-icon aria-hidden="true" name="person-circle-outline"></ion-icon>
+    <ion-label routerLink="/profile">Profile</ion-label>
+  </ion-tab-button>
+</ion-tab-bar>

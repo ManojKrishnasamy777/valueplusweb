@@ -3,7 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  // API_URL: "http://49.204.233.249:8081/api",
+  API_URL: "http://192.168.0.112:8100/api",
+
+  // SECERT_KEY: "684048b86969555feb445efdb279ac4d5ae533c0d401eedace44d51fec37f8a5766b279acae53"
 };
 
 /*

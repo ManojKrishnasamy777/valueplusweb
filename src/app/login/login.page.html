@@ -1,0 +1,38 @@
+<ion-content [fullscreen]="true">
+  <ion-card class="m-2 p-3 bg-white rounded" style="min-width: 300px; max-width: 400px;">
+    <div class="ion-text-center">
+      <img src="../../assets/images/logo.png" width="250" height="80">
+    </div>
+    <h1 class="ion-text-center">Login</h1>
+    <form [formGroup]="loginForm">
+      <div class="ion-margin-bottom">
+        <ion-item>
+          <ion-input formControlName="email" labelPlacement="floating" placeholder="Enter Email" type="text">
+            <div slot="label">Email<ion-text color="danger">*</ion-text></div>
+          </ion-input>
+        </ion-item>
+        <div *ngIf="fc['email'].errors && (fc['email'].touched || fc['email'].dirty)">
+          <small *ngIf="fc['email'].errors['required']"><ion-text color="danger">Please enter Email.</ion-text></small>
+          <small *ngIf="fc['email'].errors['pattern']"><ion-text color="danger">Invalid email.</ion-text></small>
+        </div>
+      </div>
+      <div class="ion-margin-bottom">
+        <ion-item class="password-ip-item">
+          <ion-input formControlName="password" labelPlacement="floating" placeholder="Enter password" type="password">
+            <div slot="label">Password <ion-text color="danger">*</ion-text></div>
+          </ion-input>
+          <ion-button slot="end" fill="clear" (click)="togglePasswordVisibility($event)">
+            <ion-icon slot="icon-only" name="eye-outline"></ion-icon>
+          </ion-button>
+        </ion-item>
+        <div *ngIf="fc['password'].errors && (fc['password'].touched || fc['password'].dirty)">
+          <small *ngIf="fc['password'].errors['required']"><ion-text color="danger">Please enter
+              password.</ion-text></small>
+          <small *ngIf="fc['password'].errors['minlength']"><ion-text color="danger">Password must be minimum 6
+              characters.</ion-text></small>
+        </div>
+      </div>
+      <ion-button expand="block" class="ion-no-margin" (click)="login()">Login</ion-button>
+    </form>
+  </ion-card>
+</ion-content>

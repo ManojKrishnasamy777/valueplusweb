@@ -1,0 +1,11 @@
+<ion-item>
+  <ion-input labelPlacement="floating" placeholder="" type="text" [readonly]="readonly" [value]="date | date:'dd/MM/yyyy hh:mm a'" (click)="(disabled || readonly)|| presentCalenderModal()">
+    <div slot="label">{{ipLabel}} </div>
+  </ion-input>
+</ion-item>
+  <!-- <ion-button id="open-custom-dialog" color="light"></ion-button> -->
+<!-- <ion-modal id="calender-modal" [keepContentsMounted]="true" [trigger]="calenderId" (ionModalDidPresent)="modalPresent()">
+  <ng-template>
+    <ion-datetime presentation="date" (ionChange)="onDateSelect($event)"></ion-datetime>
+  </ng-template>
+</ion-modal> -->

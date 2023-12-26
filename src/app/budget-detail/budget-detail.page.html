@@ -1,13 +1,68 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>budget-detail</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button default-href="/dashboard"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Notification List</ion-title>
   </ion-toolbar>
 </ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">budget-detail</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div class="rounded-10 mb-3 p-2" style="border: 1px solid #C6C3FB;" *ngFor="let notification of NotificationList">
+    <div class="d-flex flex-row align-items-center justify-content-between mb-2">
+      <span class="text-sub-title">Req No.</span>
+      <span class="flex-grow-1 mx-3 dotted-line"></span>
+      <span class="text-title">{{notification.reqNo}}</span>
+    </div>
+    <div class="d-flex flex-row align-items-center justify-content-between mb-2">
+      <span class="text-sub-title">Red Date</span>
+      <span class="flex-grow-1 mx-3 dotted-line"></span>
+      <span class="text-title">{{notification.reqDt | date:'dd/MM/YYYY'}}</span>
+    </div>
+    <div class="d-flex flex-row align-items-center justify-content-between mb-2">
+      <span class="text-sub-title">Trans No.</span>
+      <span class="flex-grow-1 mx-3 dotted-line"></span>
+      <span class="text-title">{{notification.txnNo }}</span>
+    </div>
+    <div class="d-flex flex-row align-items-center justify-content-between mb-2">
+      <span class="text-sub-title">Reference</span>
+      <span class="flex-grow-1 mx-3 dotted-line"></span>
+      <span class="text-title">{{notification.reference }}</span>
+    </div>
+    <div class="d-flex flex-row align-items-center justify-content-between mb-2">
+      <span class="text-sub-title">Requisitioner</span>
+      <span class="flex-grow-1 mx-3 dotted-line"></span>
+      <span class="text-title">{{notification.requisitioner }}</span>
+    </div>
+    <div class="d-flex flex-row align-items-center justify-content-between mb-2">
+      <span class="text-sub-title">Approved User</span>
+      <span class="flex-grow-1 mx-3 dotted-line"></span>
+      <span class="text-title">{{notification.approvalUser }}</span>
+    </div>
+    <div class="d-flex flex-row align-items-center justify-content-between mb-2">
+      <span class="text-sub-title">approved Date</span>
+      <span class="flex-grow-1 mx-3 dotted-line"></span>
+      <span class="text-title">{{notification.approvalDt }}</span>
+    </div>
+    <div class="d-flex flex-row align-items-center justify-content-between mb-2">
+      <span class="text-sub-title">Approved Time</span>
+      <span class="flex-grow-1 mx-3 dotted-line"></span>
+      <span class="text-title">{{notification.approvalTime }}</span>
+    </div>
+    <div class="d-flex flex-row align-items-center justify-content-between mb-2">
+      <span class="text-sub-title">Approved Comments</span>
+      <span class="flex-grow-1 mx-3 dotted-line"></span>
+      <span class="text-title">{{notification.approvalComments }}</span>
+    </div>
+    <div class="d-flex flex-row justify-content-between align-items-center">
+      <ion-icon slot="icon-only" src="../../assets/images/pdf-file.svg" class="fs-1" (click)="openPDF()"></ion-icon>
+      <div>
+        <ion-button color="primary" (click)="NotificationView(notification.pId)">
+          View
+        </ion-button>
+      </div>
+    </div>
+  </div>
 </ion-content>

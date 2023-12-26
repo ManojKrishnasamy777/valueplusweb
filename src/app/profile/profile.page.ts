@@ -1,90 +1,127 @@
-import { DocumentViewerOptions } from './../../../node_modules/@awesome-cordova-plugins/document-viewer/ngx/index.d';
-import { Component, OnInit, CUSTOM_ELEMENTS_SCHEMA, ViewChild, ElementRef, TemplateRef, AfterViewInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute, RouterLink } from '@angular/router';
-import { IonBackButton,IonCard, IonButtons, IonContent, IonHeader, IonIcon, IonModal, IonText, IonTitle, IonToolbar, IonRadio, IonRadioGroup, IonRefresher, IonRefresherContent } from '@ionic/angular/standalone';
-import { addIcons } from 'ionicons';
-import { checkboxOutline, closeCircleOutline, closeOutline } from 'ionicons/icons';
-import { Platform, ValueAccessor } from '@ionic/angular/common';
-import { DocumentViewer } from '@awesome-cordova-plugins/document-viewer/ngx';
-import { FileOpener } from '@awesome-cordova-plugins/file-opener/ngx';
-import { FileTransfer, FileTransferObject } from '@awesome-cordova-plugins/file-transfer/ngx';
-import { File } from '@awesome-cordova-plugins/file/ngx';
-import { HTTP } from '@awesome-cordova-plugins/http/ngx';
+
+import { Component, OnInit, ViewChild} from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { CommonHelperService } from '../Helper/common-helper.service';
+import { CommonHelper } from '../Helper/CommonHelper';
+import { CommonService } from '../Service/common.service';
+import { ActionSheetController, IonicModule } from '@ionic/angular';
+
+// import { Http } from '@capacitor-community/http';
+// import { CapacitorHttp, HttpResponse } from '@capacitor/core';
+// import { LoadingController, ToastController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.page.html',
   styleUrls: ['./profile.page.scss'],
-  standalone: true,
-  imports: [
-    CommonModule,
-    IonHeader,
-    IonToolbar,
-    IonButtons,
-    IonBackButton,
-    IonTitle,
-    FormsModule,
-    RouterLink,
-    IonContent,
-    IonIcon,
-    IonText,
-    IonModal,
-    FormsModule,
-    ReactiveFormsModule,
-    IonRadio,
-    IonRadioGroup,
-    IonRefresher,
-    IonRefresherContent,
-    IonCard
-  ],
-  providers: [
-    DocumentViewer,
-    FileOpener,
-    FileTransfer,
-    File,
-    HTTP
+  styles: [
+    `ion-content::part(scroll) {
+      display: grid;
+      align-items: center;
+      justify-content: center;
+    }`
   ]
 })
-export class ProfilePage implements OnInit, AfterViewInit {
-  @ViewChild(IonModal) modal!: IonModal;
-  commentsFc = new FormControl('');
-  isModalOpen: boolean = false;
-  type: string = '';
-  Status: string = '';
-  //@ts-ignore
-  CommendForm: FormGroup;
-  
+export class profilePage implements OnInit {
+  @ViewChild('logoutAlert')
+  alert!: HTMLIonAlertElement;
+  handlerMessage = '';
+  roleMessage = '';
+  public alertButtons = [
+    {
+      text: 'No',
+      role: 'cancel',
+      // cssClass: 'text-danger',
+      handler: () => {
+        this.handlerMessage = 'Alert canceled';
+      },
+    },
+    {
+      text: 'Yes',
+      role: 'confirm',
+      // cssClass: 'text-success',
+      handler: () => {
+        this.handlerMessage = 'Alert confirmed';
+      },
+    },
+  ];
+
+  countList: any = [];
+
+
   constructor(
-    private route: ActivatedRoute,
+    private fb: FormBuilder,
+    private router: Router,
+    private commonhelper : CommonHelper,
+    private helper: CommonHelperService,
+    private httpService: CommonService,
+    private actionSheetCtrl: ActionSheetController,
+  ) { }
 
-  ) {
-    addIcons({ checkboxOutline, closeCircleOutline, closeOutline });
+  async ngOnInit() {
+    const loading: HTMLIonLoadingElement = await this.helper.showSpinner();
+  //  await this.GetProfileList();
+   loading.dismiss();
+
   }
 
-  // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
-  ngOnInit() {
-  }
+  // async GetProfileList() {
+  //   let Userdata = this.helper.GetUserInfo();
+  //   let res = await this.httpService.GetAll("UserProfile");
+  //   if (res) {
+  //     this.countList = res;
+  //   }
+  // }
 
-  ngAfterViewInit() {
-  
-  }
+  async logout() {
+    const loading: HTMLIonLoadingElement = await this.commonhelper.ShowSpinner();
+     this.commonhelper.DeleteAllLocalStorage();
+     this.commonhelper.redirectTo("login");
+     loading.dismiss();
 
+    }
+    async presentActionSheet() {
+      const actionSheet = await this.actionSheetCtrl.create({
+        header: 'Actions',
+        buttons: [
+          {
+            text: 'Profile',
+            icon: 'person-outline',
+            handler: () => {
+              this.commonhelper.redirectTo("/profile")
+            },
+          },
+          {
+            text: 'Change Password',
+            icon: 'lock-open-outline',
+            handler: () => {
+              this.commonhelper.redirectTo("/changepassword")
+            },
+          },
+          {
+            text: 'Log Out',
+            icon: 'log-out-outline',
+            handler: () => {
+              console.log(this.router.url)
+             this.alert.present();
+            this.alert.onDidDismiss().then((ev) => {
+              if (ev.role == 'confirm') {
+                this.logout();
+              }
+            });
+            },
+          },
+        ],
+      });
 
+      await actionSheet.present();
+    }
 
-
-  get fc() {
-    return this.CommendForm.controls;
-  }
-
-
-
-  handleRefresh(event: any) {
-    setTimeout(async () => {
-      // Any calls to load data go here
-      event.target.complete();
-    }, 2000);
-  }
+async SignOut() {
 
 }
+
+}
+

@@ -1,29 +1,5 @@
-<!-- <ion-header class="ion-no-border">
-  <ion-toolbar style="--background: #3E4095;border-bottom-left-radius: 15px;border-bottom-right-radius: 15px;">
-    <ion-title>
-      <div class="d-flex flex-row flex-nowrap align-items-center py-3">
-        <ion-avatar style="width: 42px;height: 42px;">
-          <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-        </ion-avatar>
-        <div class="flex-grow-1 ms-3">
-          <div class="text-white fs-15">HARI MURUGAN</div>
-          <div class="text-white fs-12">#SS53424</div>
-        </div>
-      </div>
-    </ion-title>
-  </ion-toolbar>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-    </ion-buttons>
-    <ion-title>Dashboard</ion-title>
-  </ion-toolbar>
-</ion-header> -->
-
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <!-- <ion-buttons slot="start">
-      <ion-back-button default-href="/walkthrough"></ion-back-button>
-    </ion-buttons> -->
     <ion-title>Dashboard</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -32,66 +8,57 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   <ion-accordion-group>
-    <ion-accordion toggleIconSlot="start">
-      <ion-item slot="header" color="light">
-        <ion-label>Approvals
-        </ion-label>
-      </ion-item>
-      <div class="ion-padding" slot="content">
-        <div class="text-white" style="border-radius: 10px;">
-          <div class="d-flex flex-row align-items-center justify-content-between p-3"
-            style="background-color: #3E4095;border-top-right-radius: 10px;border-top-left-radius: 10px;">
-            <span>Approvals</span>
-            <span>20</span>
+    <ion-accordion toggleIconSlot="start" class="mb-4">
+      <ion-item slot="header" color="red"
+        style="background: #3E4095;border-top-right-radius: 10px;border-top-left-radius: 10px;">
+        <div class="col-12 row">
+          <div class="col-6">
+            <span style="color: white; font-weight: 600;">Approvals</span>
           </div>
-          <div class="p-3"
+          <div class="col-6" style="text-align: end;">
+            <span style="color: white;">{{TotalNoOfRowsApproved }}</span>
+          </div>
+        </div>
+      </ion-item>
+      <div class="" slot="content">
+        <div class="text-white" style="border-radius: 10px;">
+          <div
             style="background-color: rgba(102, 159, 255, 0.28);border-bottom-right-radius: 10px;border-bottom-left-radius: 10px;">
-            <div routerLink="/budget-list" [queryParams]="{ type: 'Budget' }"
-              class="d-flex flex-row align-items-center justify-content-between mb-2 text-black cursor-pointer">
-              <span>Budget</span>
-              <span class="flex-grow-1 mx-3 dotted-line"></span>
-              <span>5</span>
-            </div>
-            <div class="d-flex flex-row align-items-center justify-content-between mb-2 text-black">
-              <span>Rate</span>
-              <span class="flex-grow-1 mx-3 dotted-line"></span>
-              <span>5</span>
-            </div>
-            <div class="d-flex flex-row align-items-center justify-content-between mb-2 text-black">
-              <span>Stack Allocation</span>
-              <span class="flex-grow-1 mx-3 dotted-line"></span>
-              <span>6</span>
+            <div class="p-3" *ngFor="let approval of ApprovalList">
+              <div (click)="Budget(approval.type)"
+                class="d-flex flex-row align-items-center justify-content-between mb-2 text-black cursor-pointer">
+                <span>{{approval.type}}</span>
+                <span class="flex-grow-1 mx-3 dotted-line"></span>
+                <span>{{approval.noofRows}}</span>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </ion-accordion>
     <ion-accordion toggleIconSlot="start">
-      <ion-item slot="header" color="light">
-        <ion-label>Notification
-        </ion-label>
-      </ion-item>
-      <div class="ion-padding" slot="content">
-        <div class="text-white" style="border-radius: 10px;">
-          <div class="d-flex flex-row align-items-center justify-content-between p-3 rounded-top-10 cu-bg-primary">
-            <span>Notification</span>
-            <span>20</span>
+      <ion-item slot="header" color="red"
+        style="background: #3E4095;border-top-right-radius: 10px;border-top-left-radius: 10px;">
+        <div class="col-12 row">
+          <div class="col-6">
+            <span style="color: white;font-weight: 600; ">Notification</span>
           </div>
-          <div class="p-3 rounded-bottom-10" style="background-color: rgba(102, 159, 255, 0.28);">
-            <div class="d-flex flex-row align-items-center justify-content-between mb-2 text-black">
-              <span>View </span>
-              <span class="flex-grow-1 mx-3 dotted-line"></span>
-              <span>5</span>
-            </div>
-            <div class="d-flex flex-row align-items-center justify-content-between mb-2 text-black">
-              <span>Approval</span>
-              <span class="flex-grow-1 mx-3 dotted-line"></span>
-              <span>5</span>
-            </div>
-            <div class="d-flex flex-row align-items-center justify-content-between mb-2 text-black">
-              <span>Reject</span>
-              <span class="flex-grow-1 mx-3 dotted-line"></span>
-              <span>6</span>
+          <div class="col-6" style="text-align: end;">
+            <span style="color: white;">{{TotalNoOfRowsNotification}}</span>
+          </div>
+        </div>
+      </ion-item>
+      <div class="" slot="content">
+        <div class="text-white" style="border-radius: 10px;">
+          <div
+            style="background-color: rgba(102, 159, 255, 0.28);border-bottom-right-radius: 10px;border-bottom-left-radius: 10px;">
+            <div class="p-3" *ngFor="let notification of NotificationList">
+              <div (click)="NotificationRedirect(notification.type)"
+                class="d-flex flex-row align-items-center justify-content-between mb-2 text-black">
+                <span>{{notification.type}} </span>
+                <span class="flex-grow-1 mx-3 dotted-line"></span>
+                <span>{{notification.noofRows}}</span>
+              </div>
             </div>
           </div>
         </div>
@@ -99,3 +66,16 @@
     </ion-accordion>
   </ion-accordion-group>
 </ion-content>
+<ion-tab-bar slot="bottom" class="ion-no-border" style="--border: none;">
+  <ion-tab-button tab="dashboard" href="/dashboard">
+    <ion-icon aria-hidden="true" name="speedometer-outline"></ion-icon>
+    <ion-label>Dashboard</ion-label>
+  </ion-tab-button>
+  <ion-tab-button>
+    <img src="../../assets/icon/icon.png">
+  </ion-tab-button>
+  <ion-tab-button tab="profile" href="/profile">
+    <ion-icon aria-hidden="true" name="person-circle-outline"></ion-icon>
+    <ion-label routerLink="/profile">Profile</ion-label>
+  </ion-tab-button>
+</ion-tab-bar>

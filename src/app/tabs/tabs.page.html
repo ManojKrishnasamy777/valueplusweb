@@ -1,18 +1,25 @@
-<ion-tabs class="ion-no-border">
-  <ion-tab-bar slot="bottom" class="ion-no-border" style="--border: none;">
-    <ion-tab-button tab="dashboard" href="/dashboard">
-      <ion-icon aria-hidden="true" name="speedometer-outline"></ion-icon>
-      <ion-label>Dashboard</ion-label>
+<ion-tabs>
+
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="booking">
+      <ion-icon name="bookmarks-outline"></ion-icon>
+      <ion-label>Booking</ion-label>
     </ion-tab-button>
+
+    <!-- <ion-tab-button tab="profile">
+      <ion-icon aria-hidden="true" name="person-outline"></ion-icon>
+      <ion-label>Profile</ion-label>
+    </ion-tab-button> -->
 
     <ion-tab-button>
-      <img src="../../assets/icon/icon.png">
-      <!-- <ion-label>Tab 3</ion-label> -->
-    </ion-tab-button>
-
-    <ion-tab-button tab="profile" href="/profile">
-      <ion-icon aria-hidden="true" name="person-circle-outline"></ion-icon>
-      <ion-label routerLink="/profile">Profile</ion-label>
+      <ion-icon id="open-action-sheet" name="person-outline" (click)="presentActionSheet()"></ion-icon>Actions
     </ion-tab-button>
   </ion-tab-bar>
+
 </ion-tabs>
+<ion-alert
+  #logoutAlert
+  header="Logout?"
+  message="Are you sure you want to logout"
+  [buttons]="alertButtons"
+></ion-alert>
