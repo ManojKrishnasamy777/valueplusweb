@@ -96,7 +96,8 @@ export class BudgetListPage implements OnInit {
 
     debugger
     const filePath = this.file.dataDirectory + 'file-sample_150kB.pdf';
-    this.nativeHTTP.downloadFile(`v1/Approval/ApprovalList?typename=${this.TypeName}&userId=${this.UserId}`, {},
+    // this.nativeHTTP.downloadFile(`v1/Approval/ApprovalList?typename=${this.TypeName}&userId=${this.UserId}`, {},
+    this.nativeHTTP.downloadFile(`https://www.africau.edu/images/default/sample.pdf`, {},
       {
       },
       filePath).then(response => {

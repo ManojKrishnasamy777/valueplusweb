@@ -14,11 +14,13 @@ export class CommonInterceptor implements HttpInterceptor {
     private helpers: CommonHelper,
     private router: Router) { }
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    debugger
     var token = this.helper.GetUserInfo()?.api_token;
     if (token == undefined) token = "";
     request = request.clone({
       setHeaders: {
         Authorization: 'Bearer ' + token,
+        'Content-Type': 'application/json'
       }
     });
     return next.handle(request).pipe(

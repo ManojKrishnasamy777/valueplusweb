@@ -37,11 +37,11 @@ export class SignUpPage implements OnInit {
   ) { }
 
   // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
-  ngOnInit() { 
+  ngOnInit() {
     this.SigninForm = this.formbuilder.group({
-      loginName: new FormControl('', Validators.compose([Validators.required])),
-      mobileNo: new FormControl('', Validators.compose([Validators.required])),
-      server_name: new FormControl('', Validators.compose([Validators.required]))
+      loginName: new FormControl('', Validators.compose([Validators.nullValidator])),
+      mobileNo: new FormControl('', Validators.compose([Validators.nullValidator])),
+      server_name: new FormControl('', Validators.compose([Validators.nullValidator]))
     });
   }
 
@@ -52,24 +52,27 @@ export class SignUpPage implements OnInit {
   async Signup() {
     debugger
     if (this.SigninForm.valid == true) {
-    let res: any = {};
-    res = await this.httpService.CommonPost(this.SignupData, "v1/Auth/Login");
-    if (res.type == 'S') {
-      let ResData: any = {};
-      ResData['server_name'] = this.SignupData.server_name + '/api';
-      ResData['mobileNo'] = this.SignupData.mobileNo;
-      ResData['loginName'] = this.SignupData.loginName;
-      ResData['api_token'] = res.response.token;
-      ResData['userId'] = res.response.userId;
-      this.helper.SetLocalStorage(this.helper.StorageName, ResData);
-      this.helper.presentSuccessToast(res.message);
-      this.router.navigate(['/dashboard'], { replaceUrl: true });
-    }
+      let res: any = {};
+      let SaveData: any = {};
+      SaveData['mobileNo'] = this.SignupData.mobileNo;
+      SaveData['loginName'] = this.SignupData.loginName;
+      res = await this.httpService.CommonPost(SaveData, "v1/Auth/Login");
+      if (res.type == 'S') {
+        let ResData: any = {};
+        ResData['server_name'] = this.SignupData.server_name + '/api';
+        ResData['mobileNo'] = this.SignupData.mobileNo;
+        ResData['loginName'] = this.SignupData.loginName;
+        ResData['api_token'] = res.response.token;
+        ResData['userId'] = res.response.userId;
+        this.helper.SetLocalStorage(this.helper.StorageName, ResData);
+        this.helper.presentSuccessToast(res.message);
+        this.router.navigate(['/dashboard'], { replaceUrl: true });
+      }
 
+    }
+    else {
+      this.commonHelper.validateAllFormFields(this.SigninForm);
+    }
   }
-  else {
-    this.commonHelper.validateAllFormFields(this.SigninForm);
-  }
-}
 
 }
