@@ -77,12 +77,13 @@ export class BudgetDetailPage implements OnInit {
 
 
   async NotificationView(id:number) {
+    debugger
     let res: any;
       if (this.NotificationData) {
         res = await this.httpService.CommonPut({},`v1/Notification/NotificationUpdate/${id}`);
           this.helper.presentSuccessToast("Notification Viewed Sucessfully");
-          await this.NotificationlList(this.TypeName, this.UserId);
-
+          // await this.NotificationlList(this.TypeName, this.UserId);
+          this.helper.RefreshredirectTo("/dashboard/");
       }
     
   }

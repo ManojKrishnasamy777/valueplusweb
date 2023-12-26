@@ -62,18 +62,18 @@ export class profilePage implements OnInit {
 
   async ngOnInit() {
     const loading: HTMLIonLoadingElement = await this.helper.showSpinner();
-   await this.GetProfileList();
+  //  await this.GetProfileList();
    loading.dismiss();
 
   }
 
-  async GetProfileList() {
-    let Userdata = this.helper.GetUserInfo();
-    let res = await this.httpService.GetAll("UserProfile");
-    if (res) {
-      this.countList = res;
-    }
-  }
+  // async GetProfileList() {
+  //   let Userdata = this.helper.GetUserInfo();
+  //   let res = await this.httpService.GetAll("UserProfile");
+  //   if (res) {
+  //     this.countList = res;
+  //   }
+  // }
 
   async logout() {
     const loading: HTMLIonLoadingElement = await this.commonhelper.ShowSpinner();

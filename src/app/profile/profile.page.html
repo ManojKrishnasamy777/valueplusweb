@@ -2,40 +2,53 @@
     <div class="custom-profile-container">
       <h1 class="custom-profile-title">Profile Page</h1>
       <div class="custom-profile-image-container">
-        <img src="../../assets/images/profile-circle.256x256 (1).png" class="custom-profile-image" alt="Profile Image">
+        <img src="../../assets/icon/icon.png" class="custom-profile-image" alt="Profile Image">
       </div>
   
-      <div class="custom-profile-details" *ngFor="let Count of countList">
+      <div class="custom-profile-details">
         <ion-buttons class="custom-detail-item">
           <ion-button>
             <ion-icon name="mail-outline" class="custom-icon"></ion-icon>
           </ion-button>
-          <ion-title class="custom-detail-text">Email: {{ Count.email }}</ion-title>
+          <ion-title class="custom-detail-text">Email:</ion-title>
         </ion-buttons>
   
         <ion-buttons class="custom-detail-item">
           <ion-button>
             <ion-icon name="person-outline" class="custom-icon"></ion-icon>
           </ion-button>
-          <ion-title class="custom-detail-text">First Name: {{ Count.first_name }}</ion-title>
+          <ion-title class="custom-detail-text">First Name: </ion-title>
         </ion-buttons>
   
         <ion-buttons class="custom-detail-item">
           <ion-button>
             <ion-icon name="person-outline" class="custom-icon"></ion-icon>
           </ion-button>
-          <ion-title class="custom-detail-text">Last Name: {{ Count.last_name }}</ion-title>
+          <ion-title class="custom-detail-text">Last Name: </ion-title>
         </ion-buttons>
   
         <ion-buttons class="custom-detail-item">
           <ion-button>
             <ion-icon name="call-outline" class="custom-icon"></ion-icon>
           </ion-button>
-          <ion-title class="custom-detail-text">Mobile Number: {{ Count.mobile }}</ion-title>
+          <ion-title class="custom-detail-text">Mobile Number:</ion-title>
         </ion-buttons>
       </div>
     </div>
   </ion-content>
+  <ion-tab-bar slot="bottom" class="ion-no-border" style="--border: none;">
+    <ion-tab-button tab="dashboard" href="/dashboard">
+      <ion-icon aria-hidden="true" name="speedometer-outline"></ion-icon>
+      <ion-label>Dashboard</ion-label>
+    </ion-tab-button>
+    <ion-tab-button>
+      <img src="../../assets/icon/icon.png">
+    </ion-tab-button>
+    <ion-tab-button tab="profile" href="/profile">
+      <ion-icon aria-hidden="true" name="person-circle-outline"></ion-icon>
+      <ion-label routerLink="/profile">Profile</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
   
  
   
